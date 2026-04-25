@@ -83,14 +83,6 @@
   .stat { text-align: center; }
   .stat-num { font-size: 2rem; font-weight: 800; color: var(--accent); display: block; }
   .stat-label { font-size: 0.9rem; color: var(--muted); margin-top: 0.3rem; }
-  .scroll-hint { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 0.5rem; color: var(--muted); font-size: 0.8rem; animation: bounce 2s infinite; }
-  .scroll-hint::after { content: ''; width: 1px; height: 40px; background: linear-gradient(to bottom, var(--muted), transparent); }
-
-  /* SECTIONS */
-  section { padding: 6rem 2rem; }
-  .section-header { text-align: center; margin-bottom: 3.5rem; }
-  .section-tag { font-size: 0.8rem; color: var(--accent); letter-spacing: 3px; text-transform: uppercase; display: block; margin-bottom: 0.8rem; }
-  .section-header h2 { font-size: clamp(1.8rem,4vw,2.8rem); font-weight: 800; }
 
   /* GAMES */
   #games { background: var(--bg2); }
@@ -106,9 +98,6 @@
   .badge-purchase { position: absolute; top: 1rem; left: 1rem; background: rgba(37,211,102,0.9); color: #fff; font-size: 0.7rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 4px; z-index: 3; }
   
   .game-body { padding: 1.5rem; }
-  .game-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.8rem; }
-  .game-tag { font-size: 0.75rem; color: var(--accent2); background: rgba(232,197,71,0.08); border: 1px solid rgba(232,197,71,0.2); padding: 0.2rem 0.7rem; border-radius: 50px; }
-  
   .update-tag { font-size: 0.7rem; padding: 0.15rem 0.5rem; border-radius: 4px; margin-right: 0.5rem; font-weight: 700; }
   .update-tag.continuous { background: rgba(37,211,102,0.15); color: #25d366; border: 1px solid rgba(37,211,102,0.3); }
   .update-tag.fixed { background: rgba(232,197,71,0.15); color: var(--accent); border: 1px solid rgba(232,197,71,0.3); }
@@ -116,48 +105,34 @@
 
   .game-body h3 { font-size: 1.4rem; font-weight: 700; margin-bottom: 0.5rem; display: flex; align-items: center; }
   .game-body p { color: var(--muted); font-size: 0.95rem; line-height: 1.7; margin-bottom: 1.2rem; }
-  .game-features { list-style: none; margin-bottom: 1.5rem; }
-  .game-features li { font-size: 0.9rem; color: var(--muted); padding: 0.3rem 0; display: flex; align-items: center; gap: 0.5rem; }
-  .game-features li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
-
-  /* ABOUT */
-  #about { background: var(--bg); }
-  .about-inner { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
-  .about-text h2 { font-size: 2.2rem; font-weight: 800; margin-bottom: 1.2rem; line-height: 1.2; }
-  .about-text h2 span { color: var(--accent); }
-  .about-text p { color: var(--muted); line-height: 1.9; font-size: 1rem; margin-bottom: 1rem; }
-
-  /* FOOTER */
-  footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 2.5rem; text-align: center; }
-  .footer-logo { font-size: 1.3rem; font-weight: 800; color: var(--accent); letter-spacing: 2px; margin-bottom: 1rem; display: block; }
-  .footer-copy { font-size: 0.85rem; color: var(--muted); }
-
-  /* MODALS */
-  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 200; align-items: center; justify-content: center; backdrop-filter: blur(4px); }
-  .modal-overlay.open { display: flex; }
-  .modal { background: var(--bg3); border: 1px solid var(--border); border-radius: 16px; padding: 2.5rem; width: 100%; max-width: 400px; position: relative; }
-  .modal input { width: 100%; padding: 0.8rem 1rem; background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; color: var(--text); font-family: 'Tajawal', sans-serif; font-size: 1rem; margin-bottom: 1rem; outline: none; }
-  .modal-close { position: absolute; top: 1rem; left: 1rem; background: none; border: none; color: var(--muted); font-size: 1.4rem; cursor: pointer; }
 
   /* ADMIN */
   .admin-panel { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 300; overflow-y: auto; padding: 2rem; }
   .admin-panel.open { display: block; }
   .admin-box { background: var(--bg3); border: 1px solid var(--border); border-radius: 16px; width: 100%; max-width: 900px; padding: 2.5rem; margin: 2rem auto; position: relative; }
   .admin-section { margin-bottom: 3rem; border-bottom: 1px solid var(--border); padding-bottom: 2rem; }
-  .admin-section h3 { color: var(--accent); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem; }
+  .admin-section h3 { color: var(--accent); margin-bottom: 1.5rem; }
   .admin-game-item { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; }
-  .admin-game-fields { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
-  .admin-game-fields input, .admin-game-fields select, .admin-game-fields textarea { width: 100%; padding: 0.7rem; background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-family: 'Tajawal'; }
-  .admin-game-fields .full { grid-column: 1 / -1; }
-  .btn-admin { padding: 0.8rem 1.8rem; border-radius: 50px; font-weight: 600; cursor: pointer; border: none; }
-  .btn-save { background: var(--accent); color: #000; }
-  .save-msg { color: var(--green); margin-top: 1rem; display: none; }
+  .admin-game-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.05); }
+  .admin-icon-preview { width: 40px; height: 40px; border-radius: 8px; object-fit: cover; background: var(--bg3); border: 1px solid var(--border); }
+  
+  .admin-game-fields { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; }
+  .field-group { display: flex; flex-direction: column; gap: 0.5rem; }
+  .field-group label { font-size: 0.85rem; color: var(--accent2); font-weight: 600; }
+  .admin-game-fields input, .admin-game-fields select, .admin-game-fields textarea { 
+    width: 100%; padding: 0.8rem; background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-family: 'Tajawal'; 
+  }
+  .full { grid-column: 1 / -1; }
+  .btn-admin { padding: 0.8rem 1.8rem; border-radius: 50px; font-weight: 600; cursor: pointer; border: none; transition: 0.3s; }
+  .btn-save { background: var(--accent); color: #000; margin-top: 2rem; }
+  .btn-save:hover { background: var(--accent2); transform: translateY(-2px); }
+  .btn-delete { background: rgba(232,71,71,0.1); color: #e84747; border: 1px solid rgba(232,71,71,0.2); padding: 0.4rem 1rem; border-radius: 6px; font-size: 0.8rem; cursor: pointer; }
+  .save-msg { color: var(--green); margin-top: 1rem; display: none; text-align: center; font-weight: 700; }
 
   @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
   @media (max-width: 768px) {
     nav { padding: 0.8rem 1rem; flex-direction: column; gap: 1rem; position: static; }
-    .nav-socials { border: none; padding: 0; margin: 0; }
-    .hero { padding-top: 2rem; }
+    .admin-game-fields { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -172,9 +147,7 @@
     </ul>
   </div>
   <div style="display:flex; align-items:center;">
-    <div class="nav-socials" id="navSocials">
-      <!-- Socials from JS -->
-    </div>
+    <div class="nav-socials" id="navSocials"></div>
     <button id="loginBtn" onclick="openLogin()">دخول</button>
     <button id="adminBtn" onclick="openAdmin()">الإدارة</button>
   </div>
@@ -186,11 +159,9 @@
   <p>نصمم تجارب ألعاب فريدة ومبتكرة. اكتشف عالماً جديداً من المتعة والتحدي.</p>
   <div class="hero-btns">
     <a href="#games" class="btn btn-primary">اكتشف ألعابنا</a>
-    <a href="#about" class="btn btn-secondary">تعرف علينا</a>
   </div>
   <div class="stats">
     <div class="stat"><span class="stat-num" id="statCount">+1</span><span class="stat-label">لعبة مطلقة</span></div>
-    <div class="stat"><span class="stat-num">∞</span><span class="stat-label">ساعات من المتعة</span></div>
     <div class="stat"><span class="stat-num">100%</span><span class="stat-label">صنع بشغف</span></div>
   </div>
 </div>
@@ -203,31 +174,10 @@
   <div class="games-grid" id="gamesGrid"></div>
 </section>
 
-<section id="about">
-  <div class="about-inner">
-    <div class="about-text">
-      <span class="section-tag">من نحن</span>
-      <h2>نصنع ألعاباً <br><span>بروح مميزة</span></h2>
-      <p>SH Games هو استوديو ألعاب مستقل يركز على تقديم تجارب ألعاب مميزة وفريدة. نؤمن بأن الألعاب تستحق حضوراً أقوى وأكثر إبداعاً.</p>
-      <p>مهمتنا هي تصميم ألعاب ممتعة تحتفي بالإبداع والجودة، مع الحفاظ على أعلى معايير التصميم والتجربة.</p>
-    </div>
-    <div class="about-visual">
-      <div class="about-stat"><span class="about-stat-num">2025</span><span class="about-stat-label">سنة التأسيس</span></div>
-      <div class="about-stat"><span class="about-stat-num" id="statCount2">+1</span><span class="about-stat-label">لعبة مطلقة</span></div>
-      <div class="about-stat"><span class="about-stat-num">100%</span><span class="about-stat-label">صنع بشغف</span></div>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <span class="footer-logo">SH GAMES</span>
-  <div class="footer-copy">© SH Games 2026. جميع الحقوق محفوظة.</div>
-</footer>
-
 <div class="modal-overlay" id="loginModal">
   <div class="modal">
     <button class="modal-close" onclick="closeLogin()">×</button>
-    <h3 style="margin-bottom:1rem">تسجيل الدخول</h3>
+    <h3 style="margin-bottom:1.5rem">تسجيل الدخول للإدارة</h3>
     <input type="email" id="loginEmail" placeholder="البريد الإلكتروني">
     <input type="password" id="loginPass" placeholder="كلمة المرور">
     <button class="btn btn-primary" style="width:100%" onclick="doLogin()">دخول</button>
@@ -237,30 +187,32 @@
 <div class="admin-panel" id="adminPanel">
   <div class="admin-box">
     <button class="modal-close" onclick="closeAdmin()">×</button>
-    <h2 style="margin-bottom:2rem">لوحة التحكم الشاملة</h2>
+    <h2 style="margin-bottom:2rem; color: var(--accent)">لوحة التحكم الشاملة</h2>
     
     <div class="admin-section">
-      <h3>📱 الروابط الاجتماعية</h3>
+      <h3>📱 إعدادات التواصل</h3>
       <div class="admin-game-fields">
-        <div>
-          <label>رقم الواتساب (بدون +)</label>
-          <input id="setWA" placeholder="97333274727" />
+        <div class="field-group">
+          <label>رقم الواتساب (مثال: 97333274727)</label>
+          <input id="setWA" />
         </div>
-        <div>
-          <label>رابط الإنستقرام</label>
-          <input id="setIG" placeholder="https://instagram.com/..." />
+        <div class="field-group">
+          <label>رابط حساب الإنستقرام</label>
+          <input id="setIG" />
         </div>
       </div>
     </div>
 
     <div class="admin-section">
-      <h3>🎮 إدارة الألعاب</h3>
+      <h3>🎮 إدارة قائمة الألعاب</h3>
       <div id="adminGameList"></div>
-      <button class="btn btn-secondary" onclick="addGame()">+ إضافة لعبة</button>
+      <button class="btn btn-secondary" onclick="addGame()">+ إضافة لعبة جديدة</button>
     </div>
 
-    <button class="btn-admin btn-save" onclick="saveAll()">حفظ كل التغييرات</button>
-    <div id="saveMsg" class="save-msg">✅ تم تحديث الموقع بنجاح!</div>
+    <div style="text-align: center">
+      <button class="btn-admin btn-save" onclick="saveAll()">حفظ كل التغييرات</button>
+      <div id="saveMsg" class="save-msg">✅ تم تحديث الموقع بنجاح!</div>
+    </div>
   </div>
 </div>
 
@@ -268,30 +220,24 @@
   const ADMIN_EMAIL = 'sayedhusain133@gmail.com';
   const ADMIN_PASS = 'Hh33274727';
 
-  let siteData = JSON.parse(localStorage.getItem('shgames_master_data')) || {
+  let siteData = JSON.parse(localStorage.getItem('shgames_v4_data')) || {
     wa: '97333274727',
-    ig: 'https://instagram.com/sh_games',
+    ig: 'https://instagram.com/',
     games: [
       {
         id: 1, name: 'حروف — Huroof', logo: 'https://i.ibb.co/Lz0D6PZ/huroof-logo.png', bg: 'https://i.ibb.co/Vv3M3P0/huroof-bg.jpg', icon: '',
-        tags: ['ألغاز'], desc: 'تحدى ذكاءك اللغوي.', features: ['مجانية'], url: '#', status: 'featured', updateStatus: 'continuous', hasPurchase: true
+        desc: 'تحدى ذكاءك اللغوي.', url: '#', status: 'featured', updateStatus: 'continuous', hasPurchase: true
       }
     ]
   };
 
   function renderSite() {
-    // Socials
     const socials = document.getElementById('navSocials');
     socials.innerHTML = `
-      <a href="https://wa.me/${siteData.wa}" class="wa-link" target="_blank">
-        <svg class="social-icon" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-      </a>
-      <a href="${siteData.ig}" class="ig-link" target="_blank">
-        <svg class="social-icon" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.332 3.608 1.308.975.975 1.245 2.242 1.308 3.608.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.332 2.633-1.308 3.608-.975.975-2.242 1.245-3.608 1.308-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.332-3.608-1.308-.975-.975-1.245-2.242-1.308-3.608-.058-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.85c.062-1.366.332-2.633 1.308-3.608.975-.975 2.242-1.245 3.608-1.308 1.266-.058 1.646-.07 4.85-.07M12 0C8.741 0 8.333.014 7.053.072 2.695.272.272 2.69.072 7.053.014 8.333 0 8.741 0 12s.014 3.667.072 4.947c.2 4.353 2.615 6.768 6.963 6.963 1.28.058 1.688.072 4.947.072s3.667-.014 4.947-.072c4.351-.195 6.765-2.61 6.963-6.963.058-1.28.072-1.688.072-4.947s-.014-3.667-.072-4.947c-.2-4.353-2.615-6.768-6.963-6.963C15.667.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-      </a>
+      <a href="https://wa.me/${siteData.wa}" class="wa-link" target="_blank">واتساب</a>
+      <a href="${siteData.ig}" class="ig-link" target="_blank">إنستقرام</a>
     `;
 
-    // Games
     const grid = document.getElementById('gamesGrid');
     grid.innerHTML = '';
     siteData.games.forEach(g => {
@@ -314,7 +260,6 @@
       grid.appendChild(card);
     });
     document.getElementById('statCount').innerText = '+' + siteData.games.length;
-    document.getElementById('statCount2').innerText = '+' + siteData.games.length;
   }
 
   function openLogin() { document.getElementById('loginModal').classList.add('open'); }
@@ -342,40 +287,76 @@
       const div = document.createElement('div');
       div.className = 'admin-game-item';
       div.innerHTML = `
-        <div class="admin-game-fields">
-          <input value="${g.name}" onchange="siteData.games[${i}].name=this.value" placeholder="اسم اللعبة">
-          <select onchange="siteData.games[${i}].updateStatus=this.value">
-            <option value="continuous" ${g.updateStatus==='continuous'?'selected':''}>مستمرة</option>
-            <option value="fixed" ${g.updateStatus==='fixed'?'selected':''}>ثابتة</option>
-            <option value="experimental" ${g.updateStatus==='experimental'?'selected':''}>تجريبية</option>
-          </select>
-          <input value="${g.logo}" onchange="siteData.games[${i}].logo=this.value" placeholder="رابط الشعار PNG">
-          <input value="${g.bg}" onchange="siteData.games[${i}].bg=this.value" placeholder="رابط الخلفية">
-          <select onchange="siteData.games[${i}].hasPurchase=(this.value==='true')">
-            <option value="true" ${g.hasPurchase?'selected':''}>🛒 تفعيل الشراء</option>
-            <option value="false" ${!g.hasPurchase?'selected':''}>❌ تعطيل الشراء</option>
-          </select>
-          <input value="${g.url}" onchange="siteData.games[${i}].url=this.value" placeholder="رابط اللعبة">
-          <textarea class="full" onchange="siteData.games[${i}].desc=this.value">${g.desc}</textarea>
+        <div class="admin-game-header">
+          <img src="${g.icon || ''}" class="admin-icon-preview" onerror="this.src='https://via.placeholder.com/40?text=؟'">
+          <span style="font-weight: 800; font-size: 1.1rem">${g.name}</span>
+          <button class="btn-delete" style="margin-right: auto" onclick="siteData.games.splice(${i},1);renderAdminList()">حذف اللعبة</button>
         </div>
-        <button class="btn-delete" style="margin-top:1rem" onclick="siteData.games.splice(${i},1);renderAdminList()">حذف</button>
+        <div class="admin-game-fields">
+          <div class="field-group">
+            <label>اسم اللعبة</label>
+            <input value="${g.name}" onchange="siteData.games[${i}].name=this.value">
+          </div>
+          <div class="field-group">
+            <label>أيقونة اللعبة (تظهر هنا على اليمين)</label>
+            <input value="${g.icon || ''}" onchange="siteData.games[${i}].icon=this.value; renderAdminList()" placeholder="ضع رابط الصورة هنا">
+          </div>
+          <div class="field-group">
+            <label>رابط شعار اللعبة (مفرغ PNG)</label>
+            <input value="${g.logo}" onchange="siteData.games[${i}].logo=this.value" placeholder="ضع رابط الصورة هنا">
+          </div>
+          <div class="field-group">
+            <label>رابط صورة خلفية اللعبة</label>
+            <input value="${g.bg}" onchange="siteData.games[${i}].bg=this.value" placeholder="ضع رابط الصورة هنا">
+          </div>
+          <div class="field-group">
+            <label>حالة التحديثات</label>
+            <select onchange="siteData.games[${i}].updateStatus=this.value">
+              <option value="continuous" ${g.updateStatus==='continuous'?'selected':''}>إضافات مستمرة</option>
+              <option value="fixed" ${g.updateStatus==='fixed'?'selected':''}>إضافات ثابتة</option>
+              <option value="experimental" ${g.updateStatus==='experimental'?'selected':''}>نسخة تجريبية</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label>عمليات الشراء</label>
+            <select onchange="siteData.games[${i}].hasPurchase=(this.value==='true')">
+              <option value="true" ${g.hasPurchase?'selected':''}>تفعيل ملصق الشراء</option>
+              <option value="false" ${!g.hasPurchase?'selected':''}>تعطيل ملصق الشراء</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label>رابط تشغيل اللعبة</label>
+            <input value="${g.url}" onchange="siteData.games[${i}].url=this.value" placeholder="https://...">
+          </div>
+          <div class="field-group">
+            <label>حالة اللعبة في الموقع</label>
+            <select onchange="siteData.games[${i}].status=this.value">
+              <option value="featured" ${g.status==='featured'?'selected':''}>نجمة (مميزة)</option>
+              <option value="normal" ${g.status==='normal'?'selected':''}>عادية</option>
+            </select>
+          </div>
+          <div class="field-group full">
+            <label>وصف اللعبة</label>
+            <textarea onchange="siteData.games[${i}].desc=this.value">${g.desc}</textarea>
+          </div>
+        </div>
       `;
       list.appendChild(div);
     });
   }
 
   function addGame() {
-    siteData.games.push({id:Date.now(), name:'لعبة جديدة', logo:'', bg:'', desc:'', url:'#', status:'normal', updateStatus:'fixed', hasPurchase:false});
+    siteData.games.push({id:Date.now(), name:'لعبة جديدة', logo:'', bg:'', icon:'', desc:'', url:'#', status:'normal', updateStatus:'fixed', hasPurchase:false});
     renderAdminList();
   }
 
   function saveAll() {
     siteData.wa = document.getElementById('setWA').value;
     siteData.ig = document.getElementById('setIG').value;
-    localStorage.setItem('shgames_master_data', JSON.stringify(siteData));
+    localStorage.setItem('shgames_v4_data', JSON.stringify(siteData));
     renderSite();
     document.getElementById('saveMsg').style.display = 'block';
-    setTimeout(()=>document.getElementById('saveMsg').style.display='none', 2000);
+    setTimeout(()=>document.getElementById('saveMsg').style.display='none', 3000);
   }
 
   renderSite();
