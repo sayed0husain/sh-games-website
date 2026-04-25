@@ -173,4 +173,274 @@
 
   @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
   @keyframes bounce { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(-8px); } }
-  @media (max-width: 768px) {\n    nav { padding: 1rem 1.5rem; }\n    .stats { gap: 2rem; }\n    .about-inner { grid-template-columns: 1fr; gap: 2rem; }\n    section { padding: 4rem 1.5rem; }\n    .admin-game-fields { grid-template-columns: 1fr; }\n  }\n</style>\n</head>\n<body>\n\n<!-- NAV -->\n<nav>\n  <div class=\"nav-logo\">SH GAMES</div>\n  <ul class=\"nav-links\">\n    <li><a href=\"#games\">ألعابنا</a></li>\n    <li><a href=\"#about\">من نحن</a></li>\n    <li><button id=\"loginBtn\" onclick=\"openLogin()\">دخول</button></li>\n    <li><button id=\"adminBtn\" onclick=\"openAdmin()\">لوحة الإدارة</button></li>\n  </ul>\n</nav>\n\n<!-- HERO -->\n<div class=\"hero\">\n  <div class=\"hero-badge\">🎮 استوديو ألعاب مستقل</div>\n  <h1>مستقبل <br><span>الألعاب</span></h1>\n  <p>نصمم تجارب ألعاب فريدة ومبتكرة. اكتشف عالماً جديداً من المتعة والتحدي.</p>\n  <div class=\"hero-btns\">\n    <a href=\"#games\" class=\"btn btn-primary\">اكتشف ألعابنا</a>\n    <a href=\"#about\" class=\"btn btn-secondary\">تعرف علينا</a>\n  </div>\n  <div class=\"stats\">\n    <div class=\"stat\"><span class=\"stat-num\" id=\"statCount\">+1</span><span class=\"stat-label\">لعبة مطلقة</span></div>\n    <div class=\"stat\"><span class=\"stat-num\">∞</span><span class=\"stat-label\">ساعات من المتعة</span></div>\n    <div class=\"stat\"><span class=\"stat-num\">100%</span><span class=\"stat-label\">صنع بشغف</span></div>\n  </div>\n  <div class=\"scroll-hint\">اسحب للأسفل</div>\n</div>\n\n<!-- GAMES -->\n<section id=\"games\">\n  <div class=\"section-header\">\n    <span class=\"section-tag\">المكتبة</span>\n    <h2>ألعابنا</h2>\n    <p>ألعاب صممت بشغف لتقديم تجربة فريدة</p>\n  </div>\n  <div class=\"games-grid\" id=\"gamesGrid\">\n    <!-- Games rendered by JS -->\n  </div>\n</section>\n\n<!-- ABOUT -->\n<section id=\"about\">\n  <div class=\"about-inner\">\n    <div class=\"about-text\">\n      <span class=\"section-tag\">من نحن</span>\n      <h2>نصنع ألعاباً <br><span>بروح مميزة</span></h2>\n      <p>SH Games هو استوديو ألعاب مستقل يركز على تقديم تجارب ألعاب مميزة وفريدة. نؤمن بأن الألعاب تستحق حضوراً أقوى وأكثر إبداعاً.</p>\n      <p>مهمتنا هي تصميم ألعاب ممتعة تحتفي بالإبداع والجودة، مع الحفاظ على أعلى معايير التصميم والتجربة.</p>\n      <div class=\"about-contact\">\n        <h4>تواصل معنا</h4>\n        <a href=\"https://wa.me/97333274727\" class=\"contact-link\" target=\"_blank\">\n          <svg class=\"wa-icon\" viewBox=\"0 0 24 24\"><path d=\"M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.937 3.659 1.435 5.63 1.435h.008c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z\"/></svg>\n          واتساب — البحرين +973 3327 4727\n        </a>\n      </div>\n    </div>\n    <div class=\"about-visual\">\n      <div class=\"about-stat\"><span class=\"about-stat-num\">2025</span><span class=\"about-stat-label\">سنة التأسيس</span></div>\n      <div class=\"about-stat\"><span class=\"about-stat-num\" id=\"statCount2\">+1</span><span class=\"about-stat-label\">لعبة مطلقة</span></div>\n      <div class=\"about-stat\"><span class=\"about-stat-num\">100%</span><span class=\"about-stat-label\">صنع بشغف</span></div>\n    </div>\n  </div>\n</section>\n\n<!-- FOOTER -->\n<footer>\n  <span class=\"footer-logo\">SH GAMES</span>\n  <ul class=\"footer-links\">\n    <li><a href=\"#games\">ألعابنا</a></li>\n    <li><a href=\"#about\">من نحن</a></li>\n    <li><a href=\"https://wa.me/97333274727\">تواصل معنا</a></li>\n  </ul>\n  <div class=\"footer-copy\">© SH Games 2026. جميع الحقوق محفوظة.</div>\n</footer>\n\n<!-- LOGIN MODAL -->\n<div class=\"modal-overlay\" id=\"loginModal\">\n  <div class=\"modal\">\n    <button class=\"modal-close\" onclick=\"closeLogin()\">×</button>\n    <h3>تسجيل الدخول</h3>\n    <p>أدخل بريدك الإلكتروني للمتابعة</p>\n    <input type=\"email\" id=\"loginEmail\" placeholder=\"البريد الإلكتروني\">\n    <input type=\"password\" id=\"loginPass\" placeholder=\"كلمة المرور\">\n    <div class=\"modal-error\" id=\"loginError\">البيانات غير صحيحة</div>\n    <button class=\"btn btn-primary\" style=\"width:100%\" onclick=\"doLogin()\">دخول</button>\n  </div>\n</div>\n\n<!-- ADMIN PANEL -->\n<div class=\"admin-panel\" id=\"adminPanel\">\n  <div class=\"admin-box\">\n    <button class=\"admin-close\" onclick=\"closeAdmin()\">×</button>\n    <h2>لوحة الإدارة</h2>\n    <p>مرحباً بك يا سيد حسين. تحكم في محتوى موقعك من هنا.</p>\n    <div class=\"admin-game-list\" id=\"adminGameList\"></div>\n    <button class=\"btn-admin btn-add\" onclick=\"addGame()\">+ إضافة لعبة جديدة</button>\n    <div class=\"admin-btn-row\">\n      <button class=\"btn-admin btn-save\" onclick=\"saveGames()\">حفظ التغييرات</button>\n      <div id=\"saveMsg\" class=\"save-msg\">✅ تم الحفظ بنجاح!</div>\n    </div>\n  </div>\n</div>\n\n<script>\n  // ===== DATA =====\n  const ADMIN_EMAIL = 'sayedhusain133@gmail.com';\n  const ADMIN_PASS = 'admin2026';\n\n  const defaultGames = [\n    {\n      id: 1,\n      name: 'حروف — Huroof',\n      emoji: '🔤',\n      tags: ['ألغاز', 'كلمات'],\n      desc: 'لعبة ألغاز وكلمات ممتعة تتحدى ذكاءك اللغوي. اكتشف الكلمات المخفية، وسّع مفرداتك، واستمتع بتجربة لعب فريدة.',\n      features: ['تحديات يومية', 'مجانية بالكامل', 'بدون إعلانات'],\n      url: 'https://1da8de91-55d5-4d39-ab0a-e4250ab35ba8-00-1ktv31il5kg3a.pike.replit.dev/',\n      status: 'featured',\n      plays: 0\n    }\n  ];\n\n  let games = JSON.parse(localStorage.getItem('shgames_data') || 'null') || defaultGames;\n  let isLoggedIn = false;\n\n  // ===== RENDER GAMES =====\n  function renderGames() {\n    const grid = document.getElementById('gamesGrid');\n    grid.innerHTML = '';\n    const released = games.filter(g => g.status !== 'incomplete');\n    const incomplete = games.filter(g => g.status === 'incomplete');\n\n    released.forEach(g => grid.appendChild(makeCard(g)));\n    incomplete.forEach(g => grid.appendChild(makeCard(g)));\n\n    if (incomplete.length === 0) {\n      const div = document.createElement('div');\n      div.className = 'coming-card';\n      div.innerHTML = '<div class=\"icon\">🎮</div><p>ألعاب جديدة قادمة قريباً...</p>';\n      grid.appendChild(div);\n    }\n\n    const count = released.length;\n    document.getElementById('statCount').textContent = '+' + count;\n    document.getElementById('statCount2').textContent = '+' + count;\n  }\n\n  function makeCard(g) {\n    const card = document.createElement('div');\n    card.className = 'game-card' + (g.status === 'incomplete' ? ' incomplete' : '');\n    const badgeMap = { featured: '<span class=\"badge-featured\">مميزة</span>', popular: '<span class=\"badge-popular\">🔥 الأكثر لعباً</span>', incomplete: '<span class=\"badge-incomplete\">قريباً</span>', normal: '' };\n    const featuresHtml = (g.features || []).map(f => `<li>${f}</li>`).join('');\n    const tagsHtml = (g.tags || []).map(t => `<span class=\"game-tag\">${t}</span>`).join('');\n    const btnHtml = g.status !== 'incomplete' && g.url\n      ? `<a href=\"${g.url}\" target=\"_blank\" class=\"btn btn-primary\" style=\"width:100%;text-align:center;\">العب الآن</a>`\n      : `<span style=\"color:var(--muted);font-size:0.9rem;\">قريباً...</span>`;\n    card.innerHTML = `\n      <div class=\"game-thumb\">${g.emoji || '🎮'}${badgeMap[g.status] || ''}</div>\n      <div class=\"game-body\">\n        <div class=\"game-tags\">${tagsHtml}</div>\n        <h3>${g.name}</h3>\n        <p>${g.desc}</p>\n        <ul class=\"game-features\">${featuresHtml}</ul>\n        ${btnHtml}\n      </div>`;\n    return card;\n  }\n\n  // ===== LOGIN =====\n  function openLogin() { document.getElementById('loginModal').classList.add('open'); }\n  function closeLogin() { document.getElementById('loginModal').classList.remove('open'); document.getElementById('loginError').style.display = 'none'; }\n  function doLogin() {\n    const email = document.getElementById('loginEmail').value.trim();\n    const pass = document.getElementById('loginPass').value.trim();\n    if (email === ADMIN_EMAIL && pass === ADMIN_PASS) {\n      isLoggedIn = true;\n      closeLogin();\n      document.getElementById('adminBtn').style.display = 'block';\n      document.getElementById('loginBtn').style.display = 'none';\n    } else {\n      document.getElementById('loginError').style.display = 'block';\n    }\n  }\n\n  document.addEventListener('keydown', e => { if (e.key === 'Enter' && document.getElementById('loginModal').classList.contains('open')) doLogin(); });\n\n  // ===== ADMIN =====\n  function openAdmin() {\n    renderAdminList();\n    document.getElementById('adminPanel').classList.add('open');\n  }\n  function closeAdmin() { document.getElementById('adminPanel').classList.remove('open'); }\n\n  function renderAdminList() {\n    const list = document.getElementById('adminGameList');\n    list.innerHTML = '';\n    games.forEach((g, i) => {\n      const div = document.createElement('div');\n      div.className = 'admin-game-item';\n      div.innerHTML = `\n        <div class=\"admin-game-header\">\n          <span>${g.emoji || '🎮'} ${g.name}</span>\n          <button class=\"btn-delete\" onclick=\"deleteGame(${i})\">🗑 حذف</button>\n        </div>\n        <div class=\"admin-game-fields\">\n          <div>\n            <label>اسم اللعبة</label>\n            <input value=\"${g.name}\" onchange=\"games[${i}].name=this.value\" />\n          </div>\n          <div>\n            <label>إيموجي</label>\n            <input value=\"${g.emoji || '🎮'}\" onchange=\"games[${i}].emoji=this.value\" />\n          </div>\n          <div>\n            <label>الحالة</label>\n            <select onchange=\"games[${i}].status=this.value\">\n              <option value=\"featured\" ${g.status==='featured'?'selected':''}>⭐ مميزة</option>\n              <option value=\"popular\" ${g.status==='popular'?'selected':''}>🔥 الأكثر لعباً</option>\n              <option value=\"normal\" ${g.status==='normal'?'selected':''}>عادية</option>\n              <option value=\"incomplete\" ${g.status==='incomplete'?'selected':''}>🔒 غير مكتملة</option>\n            </select>\n          </div>\n          <div>\n            <label>رابط اللعبة</label>\n            <input value=\"${g.url || ''}\" placeholder=\"https://...\" onchange=\"games[${i}].url=this.value\" />\n          </div>\n          <div class=\"full\">\n            <label>الوصف</label>\n            <textarea onchange=\"games[${i}].desc=this.value\">${g.desc}</textarea>\n          </div>\n        </div>`;\n      list.appendChild(div);\n    });\n  }\n\n  function addGame() {\n    games.push({ id: Date.now(), name: 'لعبة جديدة', emoji: '🎮', tags: [], desc: 'وصف اللعبة', features: [], url: '', status: 'incomplete' });\n    renderAdminList();\n  }\n\n  function deleteGame(i) {\n    if (confirm('هل أنت متأكد من حذف هذه اللعبة؟')) {\n      games.splice(i, 1);\n      renderAdminList();\n    }\n  }\n\n  function saveGames() {\n    localStorage.setItem('shgames_data', JSON.stringify(games));\n    renderGames();\n    const msg = document.getElementById('saveMsg');\n    msg.style.display = 'block';\n    setTimeout(() => msg.style.display = 'none', 3000);\n  }\n\n  // ===== INIT =====\n  renderGames();\n</script>\n</body>\n</html>\n"
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .stats { gap: 2rem; }
+    .about-inner { grid-template-columns: 1fr; gap: 2rem; }
+    section { padding: 4rem 1.5rem; }
+    .admin-game-fields { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">SH GAMES</div>
+  <ul class="nav-links">
+    <li><a href="#games">ألعابنا</a></li>
+    <li><a href="#about">من نحن</a></li>
+    <li><button id="loginBtn" onclick="openLogin()">دخول</button></li>
+    <li><button id="adminBtn" onclick="openAdmin()">لوحة الإدارة</button></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">🎮 استوديو ألعاب مستقل</div>
+  <h1>مستقبل <br><span>الألعاب</span></h1>
+  <p>نصمم تجارب ألعاب فريدة ومبتكرة. اكتشف عالماً جديداً من المتعة والتحدي.</p>
+  <div class="hero-btns">
+    <a href="#games" class="btn btn-primary">اكتشف ألعابنا</a>
+    <a href="#about" class="btn btn-secondary">تعرف علينا</a>
+  </div>
+  <div class="stats">
+    <div class="stat"><span class="stat-num" id="statCount">+1</span><span class="stat-label">لعبة مطلقة</span></div>
+    <div class="stat"><span class="stat-num">∞</span><span class="stat-label">ساعات من المتعة</span></div>
+    <div class="stat"><span class="stat-num">100%</span><span class="stat-label">صنع بشغف</span></div>
+  </div>
+  <div class="scroll-hint">اسحب للأسفل</div>
+</div>
+
+<!-- GAMES -->
+<section id="games">
+  <div class="section-header">
+    <span class="section-tag">المكتبة</span>
+    <h2>ألعابنا</h2>
+    <p>ألعاب صممت بشغف لتقديم تجربة فريدة</p>
+  </div>
+  <div class="games-grid" id="gamesGrid">
+    <!-- Games rendered by JS -->
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-inner">
+    <div class="about-text">
+      <span class="section-tag">من نحن</span>
+      <h2>نصنع ألعاباً <br><span>بروح مميزة</span></h2>
+      <p>SH Games هو استوديو ألعاب مستقل يركز على تقديم تجارب ألعاب مميزة وفريدة. نؤمن بأن الألعاب تستحق حضوراً أقوى وأكثر إبداعاً.</p>
+      <p>مهمتنا هي تصميم ألعاب ممتعة تحتفي بالإبداع والجودة، مع الحفاظ على أعلى معايير التصميم والتجربة.</p>
+      <div class="about-contact">
+        <h4>تواصل معنا</h4>
+        <a href="https://wa.me/97333274727" class="contact-link" target="_blank">
+          <svg class="wa-icon" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          واتساب — البحرين +973 3327 4727
+        </a>
+      </div>
+    </div>
+    <div class="about-visual">
+      <div class="about-stat"><span class="about-stat-num">2025</span><span class="about-stat-label">سنة التأسيس</span></div>
+      <div class="about-stat"><span class="about-stat-num" id="statCount2">+1</span><span class="about-stat-label">لعبة مطلقة</span></div>
+      <div class="about-stat"><span class="about-stat-num">100%</span><span class="about-stat-label">صنع بشغف</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-logo">SH GAMES</span>
+  <ul class="footer-links">
+    <li><a href="#games">ألعابنا</a></li>
+    <li><a href="#about">من نحن</a></li>
+    <li><a href="https://wa.me/97333274727">تواصل معنا</a></li>
+  </ul>
+  <div class="footer-copy">© SH Games 2026. جميع الحقوق محفوظة.</div>
+</footer>
+
+<!-- LOGIN MODAL -->
+<div class="modal-overlay" id="loginModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeLogin()">×</button>
+    <h3>تسجيل الدخول</h3>
+    <p>أدخل بريدك الإلكتروني للمتابعة</p>
+    <input type="email" id="loginEmail" placeholder="البريد الإلكتروني">
+    <input type="password" id="loginPass" placeholder="كلمة المرور">
+    <div class="modal-error" id="loginError">البيانات غير صحيحة</div>
+    <button class="btn btn-primary" style="width:100%" onclick="doLogin()">دخول</button>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div class="admin-panel" id="adminPanel">
+  <div class="admin-box">
+    <button class="admin-close" onclick="closeAdmin()">×</button>
+    <h2>لوحة الإدارة</h2>
+    <p>مرحباً بك يا سيد حسين. تحكم في محتوى موقعك من هنا.</p>
+    <div class="admin-game-list" id="adminGameList"></div>
+    <button class="btn-admin btn-add" onclick="addGame()">+ إضافة لعبة جديدة</button>
+    <div class="admin-btn-row">
+      <button class="btn-admin btn-save" onclick="saveGames()">حفظ التغييرات</button>
+      <div id="saveMsg" class="save-msg">✅ تم الحفظ بنجاح!</div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ===== DATA =====
+  const ADMIN_EMAIL = 'sayedhusain133@gmail.com';
+  const ADMIN_PASS = 'admin2026';
+
+  const defaultGames = [
+    {
+      id: 1,
+      name: 'حروف — Huroof',
+      emoji: '🔤',
+      tags: ['ألغاز', 'كلمات'],
+      desc: 'لعبة ألغاز وكلمات ممتعة تتحدى ذكاءك اللغوي. اكتشف الكلمات المخفية، وسّع مفرداتك، واستمتع بتجربة لعب فريدة.',
+      features: ['تحديات يومية', 'مجانية بالكامل', 'بدون إعلانات'],
+      url: 'https://1da8de91-55d5-4d39-ab0a-e4250ab35ba8-00-1ktv31il5kg3a.pike.replit.dev/',
+      status: 'featured',
+      plays: 0
+    }
+  ];
+
+  let games = JSON.parse(localStorage.getItem('shgames_data') || 'null') || defaultGames;
+  let isLoggedIn = false;
+
+  // ===== RENDER GAMES =====
+  function renderGames() {
+    const grid = document.getElementById('gamesGrid');
+    grid.innerHTML = '';
+    const released = games.filter(g => g.status !== 'incomplete');
+    const incomplete = games.filter(g => g.status === 'incomplete');
+
+    released.forEach(g => grid.appendChild(makeCard(g)));
+    incomplete.forEach(g => grid.appendChild(makeCard(g)));
+
+    if (incomplete.length === 0) {
+      const div = document.createElement('div');
+      div.className = 'coming-card';
+      div.innerHTML = '<div class="icon">🎮</div><p>ألعاب جديدة قادمة قريباً...</p>';
+      grid.appendChild(div);
+    }
+
+    const count = released.length;
+    document.getElementById('statCount').textContent = '+' + count;
+    document.getElementById('statCount2').textContent = '+' + count;
+  }
+
+  function makeCard(g) {
+    const card = document.createElement('div');
+    card.className = 'game-card' + (g.status === 'incomplete' ? ' incomplete' : '');
+    const badgeMap = { featured: '<span class="badge-featured">مميزة</span>', popular: '<span class="badge-popular">🔥 الأكثر لعباً</span>', incomplete: '<span class="badge-incomplete">قريباً</span>', normal: '' };
+    const featuresHtml = (g.features || []).map(f => `<li>${f}</li>`).join('');
+    const tagsHtml = (g.tags || []).map(t => `<span class="game-tag">${t}</span>`).join('');
+    const btnHtml = g.status !== 'incomplete' && g.url
+      ? `<a href="${g.url}" target="_blank" class="btn btn-primary" style="width:100%;text-align:center;">العب الآن</a>`
+      : `<span style="color:var(--muted);font-size:0.9rem;">قريباً...</span>`;
+    card.innerHTML = `
+      <div class="game-thumb">${g.emoji || '🎮'}${badgeMap[g.status] || ''}</div>
+      <div class="game-body">
+        <div class="game-tags">${tagsHtml}</div>
+        <h3>${g.name}</h3>
+        <p>${g.desc}</p>
+        <ul class="game-features">${featuresHtml}</ul>
+        ${btnHtml}
+      </div>`;
+    return card;
+  }
+
+  // ===== LOGIN =====
+  function openLogin() { document.getElementById('loginModal').classList.add('open'); }
+  function closeLogin() { document.getElementById('loginModal').classList.remove('open'); document.getElementById('loginError').style.display = 'none'; }
+  function doLogin() {
+    const email = document.getElementById('loginEmail').value.trim();
+    const pass = document.getElementById('loginPass').value.trim();
+    if (email === ADMIN_EMAIL && pass === ADMIN_PASS) {
+      isLoggedIn = true;
+      closeLogin();
+      document.getElementById('adminBtn').style.display = 'block';
+      document.getElementById('loginBtn').style.display = 'none';
+    } else {
+      document.getElementById('loginError').style.display = 'block';
+    }
+  }
+
+  document.addEventListener('keydown', e => { if (e.key === 'Enter' && document.getElementById('loginModal').classList.contains('open')) doLogin(); });
+
+  // ===== ADMIN =====
+  function openAdmin() {
+    renderAdminList();
+    document.getElementById('adminPanel').classList.add('open');
+  }
+  function closeAdmin() { document.getElementById('adminPanel').classList.remove('open'); }
+
+  function renderAdminList() {
+    const list = document.getElementById('adminGameList');
+    list.innerHTML = '';
+    games.forEach((g, i) => {
+      const div = document.createElement('div');
+      div.className = 'admin-game-item';
+      div.innerHTML = `
+        <div class="admin-game-header">
+          <span>${g.emoji || '🎮'} ${g.name}</span>
+          <button class="btn-delete" onclick="deleteGame(${i})">🗑 حذف</button>
+        </div>
+        <div class="admin-game-fields">
+          <div>
+            <label>اسم اللعبة</label>
+            <input value="${g.name}" onchange="games[${i}].name=this.value" />
+          </div>
+          <div>
+            <label>إيموجي</label>
+            <input value="${g.emoji || '🎮'}" onchange="games[${i}].emoji=this.value" />
+          </div>
+          <div>
+            <label>الحالة</label>
+            <select onchange="games[${i}].status=this.value">
+              <option value="featured" ${g.status==='featured'?'selected':''}>⭐ مميزة</option>
+              <option value="popular" ${g.status==='popular'?'selected':''}>🔥 الأكثر لعباً</option>
+              <option value="normal" ${g.status==='normal'?'selected':''}>عادية</option>
+              <option value="incomplete" ${g.status==='incomplete'?'selected':''}>🔒 غير مكتملة</option>
+            </select>
+          </div>
+          <div>
+            <label>رابط اللعبة</label>
+            <input value="${g.url || ''}" placeholder="https://..." onchange="games[${i}].url=this.value" />
+          </div>
+          <div class="full">
+            <label>الوصف</label>
+            <textarea onchange="games[${i}].desc=this.value">${g.desc}</textarea>
+          </div>
+        </div>`;
+      list.appendChild(div);
+    });
+  }
+
+  function addGame() {
+    games.push({ id: Date.now(), name: 'لعبة جديدة', emoji: '🎮', tags: [], desc: 'وصف اللعبة', features: [], url: '', status: 'incomplete' });
+    renderAdminList();
+  }
+
+  function deleteGame(i) {
+    if (confirm('هل أنت متأكد من حذف هذه اللعبة؟')) {
+      games.splice(i, 1);
+      renderAdminList();
+    }
+  }
+
+  function saveGames() {
+    localStorage.setItem('shgames_data', JSON.stringify(games));
+    renderGames();
+    const msg = document.getElementById('saveMsg');
+    msg.style.display = 'block';
+    setTimeout(() => msg.style.display = 'none', 3000);
+  }
+
+  // ===== INIT =====
+  renderGames();
+</script>
+</body>
+</html>
