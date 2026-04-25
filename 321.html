@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SH Games</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #07070e; --bg2: #0f0f1c; --bg3: #16162a;
+    --accent: #e8c547; --accent2: #f5d76e;
+    --text: #f0eeff; --muted: #8b87a8;
+    --border: rgba(232,197,71,0.2);
+    --green: #25d366;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Tajawal', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 3rem;
+    background: rgba(7,7,14,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo { height: 40px; cursor: pointer; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 1rem; font-weight: 500; transition: color 0.3s; }
+  .nav-links a:hover { color: var(--accent); }
+  
+  .auth-btns { display: flex; gap: 1rem; align-items: center; }
+  #loginBtn, #adminBtn {
+    background: rgba(232,197,71,0.1); border: 1px solid var(--border);
+    color: var(--accent); font-family: 'Tajawal', sans-serif;
+    font-size: 0.85rem; padding: 0.4rem 1.2rem; border-radius: 8px;
+    cursor: pointer; transition: all 0.3s;
+  }
+  #adminBtn { display: none; background: var(--accent); color: #07070e; font-weight: 700; }
+  #loginBtn:hover { background: rgba(232,197,71,0.2); }
+  #welcomeMsg { font-size: 0.85rem; color: var(--accent); display: none; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh; display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center; padding: 6rem 2rem 4rem; position: relative; overflow: hidden;
+  }
+  #heroBg {
+    position: absolute; inset: 0; z-index: -1;
+    background-size: cover; background-position: center;
+    filter: brightness(0.3); transition: background-image 0.5s;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 50% 40%, rgba(232,197,71,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-badge {
+    display: inline-block; background: rgba(232,197,71,0.1);
+    border: 1px solid var(--border); color: var(--accent2);
+    font-size: 0.9rem; padding: 0.4rem 1.2rem; border-radius: 50px;
+    margin-bottom: 1.5rem; animation: fadeUp 0.8s ease both;
+  }
+  .hero h1 { font-size: clamp(2.5rem,7vw,5rem); font-weight: 800; line-height: 1.1; margin-bottom: 1.5rem; animation: fadeUp 0.8s 0.1s ease both; }
+  .hero h1 span { color: var(--accent); }
+  .hero p { font-size: 1.15rem; color: var(--muted); max-width: 560px; line-height: 1.8; margin-bottom: 2.5rem; animation: fadeUp 0.8s 0.2s ease both; }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; animation: fadeUp 0.8s 0.3s ease both; }
+  
+  .btn { padding: 0.8rem 2rem; border-radius: 50px; font-family: 'Tajawal', sans-serif; font-size: 1rem; font-weight: 600; cursor: pointer; text-decoration: none; transition: all 0.3s; display: inline-block; border: none; }
+  .btn-primary { background: var(--accent); color: #07070e; border: 2px solid var(--accent); }
+  .btn-primary:hover { background: var(--accent2); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(232,197,71,0.3); }
+  .btn-secondary { background: transparent; color: var(--text); border: 2px solid rgba(255,255,255,0.15); }
+  .btn-secondary:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+  
+  .stats { display: flex; justify-content: center; gap: 4rem; flex-wrap: wrap; margin-top: 4rem; animation: fadeUp 0.8s 0.4s ease both; }
+  .stat { text-align: center; }
+  .stat-num { font-size: 2rem; font-weight: 800; color: var(--accent); display: block; }
+  .stat-label { font-size: 0.9rem; color: var(--muted); margin-top: 0.3rem; }
+  
+  .scroll-hint { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 0.5rem; color: var(--muted); font-size: 0.8rem; animation: bounce 2s infinite; }
+  .scroll-hint::after { content: ''; width: 1px; height: 40px; background: linear-gradient(to bottom, var(--muted), transparent); }
+
+  /* SECTIONS */
+  section { padding: 6rem 2rem; }
+  .section-header { text-align: center; margin-bottom: 3.5rem; }
+  .section-tag { font-size: 0.8rem; color: var(--accent); letter-spacing: 3px; text-transform: uppercase; display: block; margin-bottom: 0.8rem; }
+  .section-header h2 { font-size: clamp(1.8rem,4vw,2.8rem); font-weight: 800; }
+  .section-header p { color: var(--muted); margin-top: 0.8rem; font-size: 1.05rem; max-width: 500px; margin-inline: auto; line-height: 1.8; }
+
+  /* GAMES */
+  #games { background: var(--bg2); }
+  .games-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem; max-width: 1100px; margin: 0 auto; }
+  .game-card { background: var(--bg3); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; position: relative; }
+  .game-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(232,197,71,0.1); }
+  .game-card.incomplete { opacity: 0.6; border-style: dashed; }
+  .game-thumb { height: 180px; background: linear-gradient(135deg, #1a1a2e, #16213e); display: flex; align-items: center; justify-content: center; font-size: 4rem; position: relative; }
+  .badge-featured { position: absolute; top: 1rem; right: 1rem; background: var(--accent); color: #07070e; font-size: 0.75rem; font-weight: 700; padding: 0.3rem 0.8rem; border-radius: 50px; }
+  .badge-popular { position: absolute; top: 1rem; right: 1rem; background: #e84747; color: #fff; font-size: 0.75rem; font-weight: 700; padding: 0.3rem 0.8rem; border-radius: 50px; }
+  .badge-incomplete { position: absolute; top: 1rem; right: 1rem; background: #555; color: #ccc; font-size: 0.75rem; font-weight: 700; padding: 0.3rem 0.8rem; border-radius: 50px; }
+  .game-body { padding: 1.5rem; }
+  .game-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.8rem; }
+  .game-tag { font-size: 0.75rem; color: var(--accent2); background: rgba(232,197,71,0.08); border: 1px solid rgba(232,197,71,0.2); padding: 0.2rem 0.7rem; border-radius: 50px; }
+  .game-body h3 { font-size: 1.4rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .game-body p { color: var(--muted); font-size: 0.95rem; line-height: 1.7; margin-bottom: 1.2rem; }
+  .game-features { list-style: none; margin-bottom: 1.5rem; }
+  .game-features li { font-size: 0.9rem; color: var(--muted); padding: 0.3rem 0; display: flex; align-items: center; gap: 0.5rem; }
+  .game-features li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+  .coming-card { background: var(--bg3); border: 1px dashed rgba(232,197,71,0.2); border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 360px; text-align: center; padding: 2rem; color: var(--muted); }
+  .coming-card .icon { font-size: 3rem; margin-bottom: 1rem; opacity: 0.5; }
+
+  /* ABOUT */
+  .about-inner { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .about-text h2 { font-size: 2.2rem; font-weight: 800; margin-bottom: 1.2rem; line-height: 1.2; }
+  .about-text h2 span { color: var(--accent); }
+  .about-text p { color: var(--muted); line-height: 1.9; font-size: 1rem; margin-bottom: 1rem; }
+  .contact-link { display: flex; align-items: center; gap: 0.8rem; color: var(--text); text-decoration: none; font-size: 1rem; font-weight: 500; padding: 0.8rem 1.2rem; background: rgba(37,211,102,0.08); border: 1px solid rgba(37,211,102,0.25); border-radius: 10px; transition: all 0.3s; width: fit-content; margin-top: 1.5rem; }
+  .contact-link:hover { background: rgba(37,211,102,0.15); border-color: rgba(37,211,102,0.5); transform: translateY(-2px); }
+  .about-visual { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .about-stat { background: var(--bg3); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem 1rem; text-align: center; }
+  .about-stat.main { grid-column: 1 / -1; background: rgba(232,197,71,0.06); border-color: rgba(232,197,71,0.3); }
+  .about-stat-num { font-size: 2rem; font-weight: 800; color: var(--accent); display: block; }
+  .about-stat-label { font-size: 0.85rem; color: var(--muted); margin-top: 0.3rem; }
+
+  /* FOOTER */
+  footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 2.5rem; text-align: center; }
+  .footer-logo { height: 30px; margin-bottom: 1rem; }
+  .footer-links { display: flex; gap: 2rem; justify-content: center; list-style: none; margin-bottom: 1.5rem; }
+  .footer-links a { color: var(--muted); text-decoration: none; font-size: 0.9rem; transition: color 0.3s; }
+  .footer-links a:hover { color: var(--accent); }
+  .footer-copy { font-size: 0.85rem; color: var(--muted); }
+
+  /* MODALS */
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 200; align-items: center; justify-content: center; backdrop-filter: blur(4px); }
+  .modal-overlay.open { display: flex; }
+  .modal { background: var(--bg3); border: 1px solid var(--border); border-radius: 16px; padding: 2.5rem; width: 100%; max-width: 400px; position: relative; }
+  .modal h3 { font-size: 1.4rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .modal input { width: 100%; padding: 0.8rem 1rem; background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; color: var(--text); font-family: 'Tajawal', sans-serif; font-size: 1rem; margin-bottom: 1rem; outline: none; transition: border-color 0.3s; }
+  .modal input:focus { border-color: var(--accent); }
+  .modal-error { color: #e84747; font-size: 0.85rem; margin-bottom: 0.8rem; display: none; }
+
+  /* ADMIN PANEL */
+  .admin-panel { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 300; align-items: flex-start; justify-content: center; overflow-y: auto; padding: 2rem; backdrop-filter: blur(4px); }
+  .admin-panel.open { display: flex; }
+  .admin-box { background: var(--bg3); border: 1px solid var(--border); border-radius: 16px; width: 100%; max-width: 800px; padding: 2.5rem; position: relative; margin: auto; }
+  .admin-section { margin-bottom: 2.5rem; border-bottom: 1px solid var(--border); padding-bottom: 1.5rem; }
+  .admin-section:last-child { border-bottom: none; }
+  .admin-section h4 { color: var(--accent); margin-bottom: 1rem; font-size: 1.1rem; }
+  .admin-game-item { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 1.2rem; margin-bottom: 1rem; }
+  .admin-game-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+  .admin-game-fields .full { grid-column: 1 / -1; }
+  .admin-game-fields input, .admin-game-fields select, .admin-game-fields textarea { width: 100%; padding: 0.6rem; background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-family: 'Tajawal', sans-serif; }
+  
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes bounce { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(-8px); } }
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .about-inner { grid-template-columns: 1fr; }
+    .admin-game-fields { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#"><img id="siteLogo" class="nav-logo" src="https://raw.githubusercontent.com/sayed0husain/sh-games-website/main/logo.png" alt="SH Games" onerror="this.src='https://placehold.co/120x40/07070e/e8c547?text=SH+GAMES'"></a>
+  <ul class="nav-links">
+    <li><a href="#games">ألعابنا</a></li>
+    <li><a href="#about">من نحن</a></li>
+    <li class="auth-btns">
+      <span id="welcomeMsg"></span>
+      <button id="loginBtn" onclick="openLogin()">دخول</button>
+      <button id="adminBtn" onclick="openAdmin()">لوحة الإدارة</button>
+    </li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div id="heroBg"></div>
+  <div class="hero-badge">🎮 استوديو ألعاب مستقل</div>
+  <h1>مستقبل <br><span>الألعاب</span></h1>
+  <p>نصمم تجارب ألعاب فريدة ومبتكرة. اكتشف عالماً جديداً من المتعة والتحدي.</p>
+  <div class="hero-btns">
+    <a href="#games" class="btn btn-primary">اكتشف ألعابنا</a>
+    <a href="#about" class="btn btn-secondary">تعرف علينا</a>
+  </div>
+  <div class="stats">
+    <div class="stat"><span class="stat-num" id="statCount">+1</span><span class="stat-label">لعبة مطلقة</span></div>
+    <div class="stat"><span class="stat-num">∞</span><span class="stat-label">ساعات من المتعة</span></div>
+    <div class="stat"><span class="stat-num">100%</span><span class="stat-label">صنع بشغف</span></div>
+  </div>
+  <div class="scroll-hint">اسحب للأسفل</div>
+</div>
+
+<!-- GAMES -->
+<section id="games">
+  <div class="section-header">
+    <span class="section-tag">المكتبة</span>
+    <h2>ألعابنا</h2>
+    <p>ألعاب صممت بشغف لتقديم تجربة فريدة</p>
+  </div>
+  <div class="games-grid" id="gamesGrid">
+    <!-- Games rendered by JS -->
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-inner">
+    <div class="about-text">
+      <span class="section-tag">من نحن</span>
+      <h2>نصنع ألعاباً <br><span>بروح مميزة</span></h2>
+      <p>SH Games هو استوديو ألعاب مستقل يركز على تقديم تجارب ألعاب مميزة وفريدة. نؤمن بأن الألعاب تستحق حضوراً أقوى وأكثر إبداعاً.</p>
+      <p>مهمتنا هي تصميم ألعاب ممتعة تحتفي بالإبداع والجودة، مع الحفاظ على أعلى معايير التصميم والتجربة.</p>
+      <div class="about-contact">
+        <h4>تواصل معنا</h4>
+        <a href="https://wa.me/97333274727" class="contact-link" target="_blank">
+          <svg class="wa-icon" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.937 3.659 1.435 5.63 1.435h.008c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          واتساب — البحرين +973 3327 4727
+        </a>
+      </div>
+    </div>
+    <div class="about-visual">
+      <div class="about-stat main"><span class="about-stat-num">2025</span><span class="about-stat-label">سنة التأسيس</span></div>
+      <div class="about-stat"><span class="about-stat-num" id="statCount2">+1</span><span class="about-stat-label">لعبة مطلقة</span></div>
+      <div class="about-stat"><span class="about-stat-num">100%</span><span class="about-stat-label">صنع بشغف</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <img id="footerLogo" class="footer-logo" src="https://raw.githubusercontent.com/sayed0husain/sh-games-website/main/logo.png" alt="SH Games" onerror="this.src='https://placehold.co/100x30/0f0f1c/e8c547?text=SH+GAMES'">
+  <ul class="footer-links">
+    <li><a href="#games">ألعابنا</a></li>
+    <li><a href="#about">من نحن</a></li>
+    <li><a href="https://wa.me/97333274727">تواصل معنا</a></li>
+  </ul>
+  <div class="footer-copy">© SH Games 2026. جميع الحقوق محفوظة.</div>
+</footer>
+
+<!-- LOGIN MODAL -->
+<div class="modal-overlay" id="loginModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeLogin()">×</button>
+    <h3>تسجيل الدخول</h3>
+    <p>أدخل بريدك الإلكتروني للمتابعة</p>
+    <input type="email" id="loginEmail" placeholder="البريد الإلكتروني">
+    <input type="password" id="loginPass" placeholder="كلمة المرور">
+    <div class="modal-error" id="loginError">البيانات غير صحيحة</div>
+    <button class="btn btn-primary" style="width:100%" onclick="doLogin()">دخول</button>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div class="admin-panel" id="adminPanel">
+  <div class="admin-box">
+    <button class="admin-close" onclick="closeAdmin()">×</button>
+    <h2>لوحة الإدارة</h2>
+    <p>مرحباً بك يا سيد حسين. تحكم في محتوى موقعك من هنا.</p>
+    
+    <div class="admin-section">
+      <h4>🖼 إدارة الصور (روابط مباشرة)</h4>
+      <div class="admin-game-fields">
+        <div class="full">
+          <label>رابط الشعار (Logo URL)</label>
+          <input type="text" id="adminLogoUrl" placeholder="https://example.com/logo.png" onchange="updateLiveLogo(this.value)">
+        </div>
+        <div class="full">
+          <label>رابط صورة الخلفية (Hero Background URL)</label>
+          <input type="text" id="adminHeroUrl" placeholder="https://example.com/bg.jpg" onchange="updateLiveHero(this.value)">
+        </div>
+      </div>
+    </div>
+
+    <div class="admin-section">
+      <h4>🎮 إدارة الألعاب</h4>
+      <div class="admin-game-list" id="adminGameList"></div>
+      <button class="btn-admin btn-add" onclick="addGame()">+ إضافة لعبة جديدة</button>
+    </div>
+
+    <div class="admin-btn-row">
+      <button class="btn-admin btn-save" onclick="saveAll()">حفظ كافة التغييرات</button>
+      <div id="saveMsg" class="save-msg">✅ تم الحفظ بنجاح!</div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ===== DATA =====
+  const ADMIN_EMAIL = 'sayedhusain133@gmail.com';
+  const ADMIN_PASS = 'admin2026';
+
+  const defaultGames = [
+    {
+      id: 1,
+      name: 'حروف — Huroof',
+      emoji: '🔤',
+      tags: ['ألغاز', 'كلمات'],
+      desc: 'لعبة ألغاز وكلمات ممتعة تتحدى ذكاءك اللغوي. اكتشف الكلمات المخفية، وسّع مفرداتك، واستمتع بتجربة لعب فريدة.',
+      features: ['تحديات يومية', 'مجانية بالكامل', 'بدون إعلانات'],
+      url: 'https://1da8de91-55d5-4d39-ab0a-e4250ab35ba8-00-1ktv31il5kg3a.pike.replit.dev/',
+      status: 'featured'
+    }
+  ];
+
+  let games = JSON.parse(localStorage.getItem('shgames_data')) || defaultGames;
+  let siteAssets = JSON.parse(localStorage.getItem('shgames_assets')) || { logo: '', hero: '' };
+
+  // ===== RENDER =====
+  function renderGames() {
+    const grid = document.getElementById('gamesGrid');
+    grid.innerHTML = '';
+    const released = games.filter(g => g.status !== 'incomplete');
+    const incomplete = games.filter(g => g.status === 'incomplete');
+
+    released.forEach(g => grid.appendChild(makeCard(g)));
+    incomplete.forEach(g => grid.appendChild(makeCard(g)));
+
+    if (incomplete.length === 0) {
+      const div = document.createElement('div');
+      div.className = 'coming-card';
+      div.innerHTML = '<div class="icon">🎮</div><p>ألعاب جديدة قادمة قريباً...</p>';
+      grid.appendChild(div);
+    }
+    document.getElementById('statCount').textContent = '+' + released.length;
+    document.getElementById('statCount2').textContent = '+' + released.length;
+  }
+
+  function makeCard(g) {
+    const card = document.createElement('div');
+    card.className = 'game-card' + (g.status === 'incomplete' ? ' incomplete' : '');
+    const badgeMap = { featured: '<span class="badge-featured">مميزة</span>', popular: '<span class="badge-popular">🔥 الأكثر لعباً</span>', incomplete: '<span class="badge-incomplete">قريباً</span>', normal: '' };
+    const featuresHtml = (g.features || []).map(f => `<li>${f}</li>`).join('');
+    const tagsHtml = (g.tags || []).map(t => `<span class="game-tag">${t}</span>`).join('');
+    const btnHtml = g.status !== 'incomplete' && g.url
+      ? `<a href="${g.url}" target="_blank" class="btn btn-primary" style="width:100%;text-align:center;">العب الآن</a>`
+      : `<span style="color:var(--muted);font-size:0.9rem;">قريباً...</span>`;
+    card.innerHTML = `
+      <div class="game-thumb">${g.emoji || '🎮'}${badgeMap[g.status] || ''}</div>
+      <div class="game-body">
+        <div class="game-tags">${tagsHtml}</div>
+        <h3>${g.name}</h3>
+        <p>${g.desc}</p>
+        <ul class="game-features">${featuresHtml}</ul>
+        ${btnHtml}
+      </div>`;
+    return card;
+  }
+
+  // ===== AUTH =====
+  function openLogin() { document.getElementById('loginModal').classList.add('open'); }
+  function closeLogin() { document.getElementById('loginModal').classList.remove('open'); }
+  function doLogin() {
+    const email = document.getElementById('loginEmail').value.trim();
+    const pass = document.getElementById('loginPass').value.trim();
+    if (email === ADMIN_EMAIL && pass === ADMIN_PASS) {
+      document.getElementById('adminBtn').style.display = 'block';
+      document.getElementById('loginBtn').style.display = 'none';
+      document.getElementById('welcomeMsg').textContent = 'مرحباً، سيد حسين';
+      document.getElementById('welcomeMsg').style.display = 'block';
+      closeLogin();
+    } else if (email !== "") {
+        document.getElementById('loginBtn').style.display = 'none';
+        document.getElementById('welcomeMsg').textContent = 'مرحباً بك، ' + email.split('@')[0];
+        document.getElementById('welcomeMsg').style.display = 'block';
+        closeLogin();
+    } else {
+      document.getElementById('loginError').style.display = 'block';
+    }
+  }
+
+  // ===== ADMIN =====
+  function openAdmin() {
+    renderAdminList();
+    document.getElementById('adminLogoUrl').value = siteAssets.logo;
+    document.getElementById('adminHeroUrl').value = siteAssets.hero;
+    document.getElementById('adminPanel').classList.add('open');
+  }
+  function closeAdmin() { document.getElementById('adminPanel').classList.remove('open'); }
+
+  function renderAdminList() {
+    const list = document.getElementById('adminGameList');
+    list.innerHTML = '';
+    games.forEach((g, i) => {
+      const div = document.createElement('div');
+      div.className = 'admin-game-item';
+      div.innerHTML = `
+        <div class="admin-game-fields">
+          <div><label>الاسم</label><input value="${g.name}" onchange="games[${i}].name=this.value"></div>
+          <div><label>إيموجي</label><input value="${g.emoji}" onchange="games[${i}].emoji=this.value"></div>
+          <div><label>الحالة</label>
+            <select onchange="games[${i}].status=this.value">
+              <option value="featured" ${g.status==='featured'?'selected':''}>⭐ مميزة</option>
+              <option value="popular" ${g.status==='popular'?'selected':''}>🔥 الأكثر لعباً</option>
+              <option value="incomplete" ${g.status==='incomplete'?'selected':''}>🔒 قريباً</option>
+            </select>
+          </div>
+          <div><label>الرابط</label><input value="${g.url||''}" onchange="games[${i}].url=this.value"></div>
+          <div class="full"><label>الوصف</label><textarea onchange="games[${i}].desc=this.value">${g.desc}</textarea></div>
+        </div>
+        <button class="btn-delete" style="margin-top:1rem" onclick="games.splice(${i},1);renderAdminList()">حذف اللعبة</button>
+      `;
+      list.appendChild(div);
+    });
+  }
+
+  function addGame() {
+    games.push({ id: Date.now(), name: 'لعبة جديدة', emoji: '🎮', tags: [], desc: '', features: [], url: '', status: 'incomplete' });
+    renderAdminList();
+  }
+
+  function updateLiveLogo(val) { siteAssets.logo = val; applyAssets(); }
+  function updateLiveHero(val) { siteAssets.hero = val; applyAssets(); }
+
+  function applyAssets() {
+    if (siteAssets.logo) {
+      document.getElementById('siteLogo').src = siteAssets.logo;
+      document.getElementById('footerLogo').src = siteAssets.logo;
+    }
+    if (siteAssets.hero) {
+      document.getElementById('heroBg').style.backgroundImage = `url('${siteAssets.hero}')`;
+    }
+  }
+
+  function saveAll() {
+    localStorage.setItem('shgames_data', JSON.stringify(games));
+    localStorage.setItem('shgames_assets', JSON.stringify(siteAssets));
+    renderGames();
+    const msg = document.getElementById('saveMsg');
+    msg.style.display = 'block';
+    setTimeout(() => msg.style.display = 'none', 3000);
+  }
+
+  // ===== INIT =====
+  renderGames();
+  applyAssets();
+</script>
+</body>
+</html>
