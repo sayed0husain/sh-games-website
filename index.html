@@ -13,6 +13,7 @@
     --text: #f0eeff; --muted: #8b87a8;
     --border: rgba(232,197,71,0.2);
     --green: #25d366;
+    --insta: #e4405f;
   }
   html { scroll-behavior: smooth; }
   body { font-family: 'Tajawal', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
@@ -21,22 +22,36 @@
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     display: flex; align-items: center; justify-content: space-between;
-    padding: 1.2rem 3rem;
+    padding: 0.8rem 3rem;
     background: rgba(7,7,14,0.92);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
   }
-  .nav-logo { font-size: 1.5rem; font-weight: 800; color: var(--accent); letter-spacing: 2px; }
-  .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
-  .nav-links a { color: var(--muted); text-decoration: none; font-size: 1rem; font-weight: 500; transition: color 0.3s; }
+  .nav-right { display: flex; align-items: center; gap: 1.5rem; }
+  .nav-logo { font-size: 1.5rem; font-weight: 800; color: var(--accent); letter-spacing: 2px; text-decoration: none; }
+  .nav-links { display: flex; gap: 1.5rem; list-style: none; align-items: center; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: color 0.3s; }
   .nav-links a:hover { color: var(--accent); }
+
+  .nav-socials { display: flex; align-items: center; gap: 1rem; margin-right: 1.5rem; border-right: 1px solid var(--border); padding-right: 1.5rem; }
+  .social-icon { width: 20px; height: 20px; fill: currentColor; transition: transform 0.3s; }
+  .wa-link { color: var(--green); display: flex; align-items: center; text-decoration: none; font-size: 0.85rem; gap: 0.4rem; }
+  .ig-link { color: var(--insta); display: flex; align-items: center; text-decoration: none; }
+  .wa-link:hover, .ig-link:hover { transform: translateY(-2px); }
+
   #adminBtn {
     background: rgba(232,197,71,0.1); border: 1px solid var(--border);
     color: var(--accent); font-family: 'Tajawal', sans-serif;
-    font-size: 0.85rem; padding: 0.4rem 1rem; border-radius: 8px;
+    font-size: 0.8rem; padding: 0.4rem 0.8rem; border-radius: 8px;
     cursor: pointer; transition: all 0.3s; display: none;
   }
-  #adminBtn:hover { background: rgba(232,197,71,0.2); }
+  #loginBtn {
+    background: transparent; border: 1px solid var(--border);
+    color: var(--muted); font-family: 'Tajawal', sans-serif;
+    font-size: 0.8rem; padding: 0.4rem 0.8rem; border-radius: 8px;
+    cursor: pointer; transition: all 0.3s;
+  }
+  #loginBtn:hover { border-color: var(--accent); color: var(--accent); }
 
   /* HERO */
   .hero {
@@ -76,36 +91,34 @@
   .section-header { text-align: center; margin-bottom: 3.5rem; }
   .section-tag { font-size: 0.8rem; color: var(--accent); letter-spacing: 3px; text-transform: uppercase; display: block; margin-bottom: 0.8rem; }
   .section-header h2 { font-size: clamp(1.8rem,4vw,2.8rem); font-weight: 800; }
-  .section-header p { color: var(--muted); margin-top: 0.8rem; font-size: 1.05rem; max-width: 500px; margin-inline: auto; line-height: 1.8; }
 
   /* GAMES */
   #games { background: var(--bg2); }
   .games-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem; max-width: 1100px; margin: 0 auto; }
   .game-card { background: var(--bg3); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; position: relative; }
   .game-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(232,197,71,0.1); }
-  .game-card.incomplete { opacity: 0.6; border-style: dashed; }
-  .game-thumb { height: 180px; background: linear-gradient(135deg, #1a1a2e, #16213e); display: flex; align-items: center; justify-content: center; font-size: 4rem; position: relative; }
-  .badge-featured { position: absolute; top: 1rem; right: 1rem; background: var(--accent); color: #07070e; font-size: 0.75rem; font-weight: 700; padding: 0.3rem 0.8rem; border-radius: 50px; }
-  .badge-popular { position: absolute; top: 1rem; right: 1rem; background: #e84747; color: #fff; font-size: 0.75rem; font-weight: 700; padding: 0.3rem 0.8rem; border-radius: 50px; }
-  .badge-incomplete { position: absolute; top: 1rem; right: 1rem; background: #555; color: #ccc; font-size: 0.75rem; font-weight: 700; padding: 0.3rem 0.8rem; border-radius: 50px; }
+  
+  .game-thumb { height: 200px; background: #1a1a2e; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+  .game-bg-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.4; transition: transform 0.5s; }
+  .game-logo-img { position: relative; z-index: 2; max-width: 70%; max-height: 70%; object-fit: contain; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5)); }
+
+  .badge-featured { position: absolute; top: 1rem; right: 1rem; background: var(--accent); color: #07070e; font-size: 0.75rem; font-weight: 700; padding: 0.3rem 0.8rem; border-radius: 50px; z-index: 3; }
+  .badge-purchase { position: absolute; top: 1rem; left: 1rem; background: rgba(37,211,102,0.9); color: #fff; font-size: 0.7rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 4px; z-index: 3; }
+  
   .game-body { padding: 1.5rem; }
   .game-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.8rem; }
   .game-tag { font-size: 0.75rem; color: var(--accent2); background: rgba(232,197,71,0.08); border: 1px solid rgba(232,197,71,0.2); padding: 0.2rem 0.7rem; border-radius: 50px; }
-  .game-body h3 { font-size: 1.4rem; font-weight: 700; margin-bottom: 0.5rem; }
+  
+  .update-tag { font-size: 0.7rem; padding: 0.15rem 0.5rem; border-radius: 4px; margin-right: 0.5rem; font-weight: 700; }
+  .update-tag.continuous { background: rgba(37,211,102,0.15); color: #25d366; border: 1px solid rgba(37,211,102,0.3); }
+  .update-tag.fixed { background: rgba(232,197,71,0.15); color: var(--accent); border: 1px solid rgba(232,197,71,0.3); }
+  .update-tag.experimental { background: rgba(232,71,71,0.15); color: #e84747; border: 1px solid rgba(232,71,71,0.3); }
+
+  .game-body h3 { font-size: 1.4rem; font-weight: 700; margin-bottom: 0.5rem; display: flex; align-items: center; }
   .game-body p { color: var(--muted); font-size: 0.95rem; line-height: 1.7; margin-bottom: 1.2rem; }
   .game-features { list-style: none; margin-bottom: 1.5rem; }
   .game-features li { font-size: 0.9rem; color: var(--muted); padding: 0.3rem 0; display: flex; align-items: center; gap: 0.5rem; }
   .game-features li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
-  .coming-card { background: var(--bg3); border: 1px dashed rgba(232,197,71,0.2); border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 360px; text-align: center; padding: 2rem; color: var(--muted); }
-  .coming-card .icon { font-size: 3rem; margin-bottom: 1rem; opacity: 0.5; }
-
-  /* VALUES */
-  .values-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; max-width: 900px; margin: 4rem auto 0; }
-  .value-card { text-align: center; padding: 2rem 1rem; background: var(--bg3); border: 1px solid var(--border); border-radius: 12px; transition: transform 0.3s; }
-  .value-card:hover { transform: translateY(-4px); }
-  .value-icon { font-size: 2rem; margin-bottom: 0.8rem; }
-  .value-card h4 { font-size: 1rem; font-weight: 600; margin-bottom: 0.4rem; }
-  .value-card p { font-size: 0.88rem; color: var(--muted); }
 
   /* ABOUT */
   #about { background: var(--bg); }
@@ -113,89 +126,60 @@
   .about-text h2 { font-size: 2.2rem; font-weight: 800; margin-bottom: 1.2rem; line-height: 1.2; }
   .about-text h2 span { color: var(--accent); }
   .about-text p { color: var(--muted); line-height: 1.9; font-size: 1rem; margin-bottom: 1rem; }
-  .about-contact { margin-top: 2rem; }
-  .about-contact h4 { font-size: 1rem; font-weight: 600; margin-bottom: 1rem; color: var(--muted); }
-  .contact-link { display: flex; align-items: center; gap: 0.8rem; color: var(--text); text-decoration: none; font-size: 1rem; font-weight: 500; padding: 0.8rem 1.2rem; background: rgba(37,211,102,0.08); border: 1px solid rgba(37,211,102,0.25); border-radius: 10px; transition: all 0.3s; width: fit-content; }
-  .contact-link:hover { background: rgba(37,211,102,0.15); border-color: rgba(37,211,102,0.5); transform: translateY(-2px); }
-  .wa-icon { width: 22px; height: 22px; fill: #25d366; flex-shrink: 0; }
-  .about-visual { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-  .about-stat { background: var(--bg3); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem 1rem; text-align: center; }
-  .about-stat:first-child { grid-column: 1 / -1; background: rgba(232,197,71,0.06); border-color: rgba(232,197,71,0.3); }
-  .about-stat-num { font-size: 2rem; font-weight: 800; color: var(--accent); display: block; }
-  .about-stat-label { font-size: 0.85rem; color: var(--muted); margin-top: 0.3rem; }
 
   /* FOOTER */
   footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 2.5rem; text-align: center; }
   .footer-logo { font-size: 1.3rem; font-weight: 800; color: var(--accent); letter-spacing: 2px; margin-bottom: 1rem; display: block; }
-  .footer-links { display: flex; gap: 2rem; justify-content: center; list-style: none; margin-bottom: 1.5rem; }
-  .footer-links a { color: var(--muted); text-decoration: none; font-size: 0.9rem; transition: color 0.3s; }
-  .footer-links a:hover { color: var(--accent); }
   .footer-copy { font-size: 0.85rem; color: var(--muted); }
 
-  /* LOGIN MODAL */
+  /* MODALS */
   .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 200; align-items: center; justify-content: center; backdrop-filter: blur(4px); }
   .modal-overlay.open { display: flex; }
   .modal { background: var(--bg3); border: 1px solid var(--border); border-radius: 16px; padding: 2.5rem; width: 100%; max-width: 400px; position: relative; }
-  .modal h3 { font-size: 1.4rem; font-weight: 700; margin-bottom: 0.5rem; }
-  .modal p { color: var(--muted); font-size: 0.9rem; margin-bottom: 1.5rem; }
-  .modal input { width: 100%; padding: 0.8rem 1rem; background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; color: var(--text); font-family: 'Tajawal', sans-serif; font-size: 1rem; margin-bottom: 1rem; outline: none; transition: border-color 0.3s; }
-  .modal input:focus { border-color: var(--accent); }
-  .modal-close { position: absolute; top: 1rem; left: 1rem; background: none; border: none; color: var(--muted); font-size: 1.4rem; cursor: pointer; line-height: 1; }
-  .modal-error { color: #e84747; font-size: 0.85rem; margin-bottom: 0.8rem; display: none; }
+  .modal input { width: 100%; padding: 0.8rem 1rem; background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; color: var(--text); font-family: 'Tajawal', sans-serif; font-size: 1rem; margin-bottom: 1rem; outline: none; }
+  .modal-close { position: absolute; top: 1rem; left: 1rem; background: none; border: none; color: var(--muted); font-size: 1.4rem; cursor: pointer; }
 
-  /* ADMIN PANEL */
-  .admin-panel { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 300; align-items: flex-start; justify-content: center; overflow-y: auto; padding: 2rem; backdrop-filter: blur(4px); }
-  .admin-panel.open { display: flex; }
-  .admin-box { background: var(--bg3); border: 1px solid var(--border); border-radius: 16px; width: 100%; max-width: 750px; padding: 2.5rem; position: relative; margin: auto; }
-  .admin-box h2 { font-size: 1.6rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--accent); }
-  .admin-box > p { color: var(--muted); font-size: 0.9rem; margin-bottom: 2rem; }
-  .admin-close { position: absolute; top: 1rem; left: 1rem; background: none; border: none; color: var(--muted); font-size: 1.4rem; cursor: pointer; }
-  .admin-game-list { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem; }
-  .admin-game-item { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 1.2rem 1.5rem; }
-  .admin-game-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
-  .admin-game-header span { font-weight: 700; font-size: 1rem; }
-  .admin-game-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
-  .admin-game-fields label { font-size: 0.8rem; color: var(--muted); display: block; margin-bottom: 0.3rem; }
-  .admin-game-fields input, .admin-game-fields select, .admin-game-fields textarea { width: 100%; padding: 0.6rem 0.8rem; background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-family: 'Tajawal', sans-serif; font-size: 0.9rem; outline: none; transition: border-color 0.3s; }
-  .admin-game-fields input:focus, .admin-game-fields select:focus, .admin-game-fields textarea:focus { border-color: var(--accent); }
-  .admin-game-fields textarea { resize: vertical; min-height: 70px; }
+  /* ADMIN */
+  .admin-panel { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 300; overflow-y: auto; padding: 2rem; }
+  .admin-panel.open { display: block; }
+  .admin-box { background: var(--bg3); border: 1px solid var(--border); border-radius: 16px; width: 100%; max-width: 900px; padding: 2.5rem; margin: 2rem auto; position: relative; }
+  .admin-section { margin-bottom: 3rem; border-bottom: 1px solid var(--border); padding-bottom: 2rem; }
+  .admin-section h3 { color: var(--accent); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem; }
+  .admin-game-item { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; }
+  .admin-game-fields { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  .admin-game-fields input, .admin-game-fields select, .admin-game-fields textarea { width: 100%; padding: 0.7rem; background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-family: 'Tajawal'; }
   .admin-game-fields .full { grid-column: 1 / -1; }
-  .admin-game-fields select option { background: var(--bg3); }
-  .admin-btn-row { display: flex; gap: 0.8rem; flex-wrap: wrap; margin-top: 2rem; }
-  .btn-admin { padding: 0.7rem 1.5rem; border-radius: 50px; font-family: 'Tajawal', sans-serif; font-size: 0.95rem; font-weight: 600; cursor: pointer; border: none; transition: all 0.3s; }
-  .btn-save { background: var(--accent); color: #07070e; }
-  .btn-save:hover { background: var(--accent2); }
-  .btn-add { background: var(--bg2); color: var(--text); border: 1px solid var(--border); }
-  .btn-add:hover { border-color: var(--accent); color: var(--accent); }
-  .btn-delete { background: rgba(232,71,71,0.1); color: #e84747; border: 1px solid rgba(232,71,71,0.3); padding: 0.4rem 0.9rem; border-radius: 8px; font-family: 'Tajawal', sans-serif; font-size: 0.8rem; cursor: pointer; }
-  .btn-delete:hover { background: rgba(232,71,71,0.2); }
-  .save-msg { color: #25d366; font-size: 0.9rem; display: none; margin-top: 0.5rem; }
+  .btn-admin { padding: 0.8rem 1.8rem; border-radius: 50px; font-weight: 600; cursor: pointer; border: none; }
+  .btn-save { background: var(--accent); color: #000; }
+  .save-msg { color: var(--green); margin-top: 1rem; display: none; }
 
   @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
-  @keyframes bounce { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(-8px); } }
   @media (max-width: 768px) {
-    nav { padding: 1rem 1.5rem; }
-    .stats { gap: 2rem; }
-    .about-inner { grid-template-columns: 1fr; gap: 2rem; }
-    section { padding: 4rem 1.5rem; }
-    .admin-game-fields { grid-template-columns: 1fr; }
+    nav { padding: 0.8rem 1rem; flex-direction: column; gap: 1rem; position: static; }
+    .nav-socials { border: none; padding: 0; margin: 0; }
+    .hero { padding-top: 2rem; }
   }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
-  <div class="nav-logo">SH GAMES</div>
-  <ul class="nav-links">
-    <li><a href="#games">ألعابنا</a></li>
-    <li><a href="#about">من نحن</a></li>
-    <li><button id="loginBtn" onclick="openLogin()">دخول</button></li>
-    <li><button id="adminBtn" onclick="openAdmin()">لوحة الإدارة</button></li>
-  </ul>
+  <div class="nav-right">
+    <a href="#" class="nav-logo">SH GAMES</a>
+    <ul class="nav-links">
+      <li><a href="#games">ألعابنا</a></li>
+      <li><a href="#about">من نحن</a></li>
+    </ul>
+  </div>
+  <div style="display:flex; align-items:center;">
+    <div class="nav-socials" id="navSocials">
+      <!-- Socials from JS -->
+    </div>
+    <button id="loginBtn" onclick="openLogin()">دخول</button>
+    <button id="adminBtn" onclick="openAdmin()">الإدارة</button>
+  </div>
 </nav>
 
-<!-- HERO -->
 <div class="hero">
   <div class="hero-badge">🎮 استوديو ألعاب مستقل</div>
   <h1>مستقبل <br><span>الألعاب</span></h1>
@@ -209,22 +193,16 @@
     <div class="stat"><span class="stat-num">∞</span><span class="stat-label">ساعات من المتعة</span></div>
     <div class="stat"><span class="stat-num">100%</span><span class="stat-label">صنع بشغف</span></div>
   </div>
-  <div class="scroll-hint">اسحب للأسفل</div>
 </div>
 
-<!-- GAMES -->
 <section id="games">
   <div class="section-header">
     <span class="section-tag">المكتبة</span>
     <h2>ألعابنا</h2>
-    <p>ألعاب صممت بشغف لتقديم تجربة فريدة</p>
   </div>
-  <div class="games-grid" id="gamesGrid">
-    <!-- Games rendered by JS -->
-  </div>
+  <div class="games-grid" id="gamesGrid"></div>
 </section>
 
-<!-- ABOUT -->
 <section id="about">
   <div class="about-inner">
     <div class="about-text">
@@ -232,13 +210,6 @@
       <h2>نصنع ألعاباً <br><span>بروح مميزة</span></h2>
       <p>SH Games هو استوديو ألعاب مستقل يركز على تقديم تجارب ألعاب مميزة وفريدة. نؤمن بأن الألعاب تستحق حضوراً أقوى وأكثر إبداعاً.</p>
       <p>مهمتنا هي تصميم ألعاب ممتعة تحتفي بالإبداع والجودة، مع الحفاظ على أعلى معايير التصميم والتجربة.</p>
-      <div class="about-contact">
-        <h4>تواصل معنا</h4>
-        <a href="https://wa.me/97333274727" class="contact-link" target="_blank">
-          <svg class="wa-icon" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          واتساب — البحرين +973 3327 4727
-        </a>
-      </div>
     </div>
     <div class="about-visual">
       <div class="about-stat"><span class="about-stat-num">2025</span><span class="about-stat-label">سنة التأسيس</span></div>
@@ -248,130 +219,117 @@
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <span class="footer-logo">SH GAMES</span>
-  <ul class="footer-links">
-    <li><a href="#games">ألعابنا</a></li>
-    <li><a href="#about">من نحن</a></li>
-    <li><a href="https://wa.me/97333274727">تواصل معنا</a></li>
-  </ul>
   <div class="footer-copy">© SH Games 2026. جميع الحقوق محفوظة.</div>
 </footer>
 
-<!-- LOGIN MODAL -->
 <div class="modal-overlay" id="loginModal">
   <div class="modal">
     <button class="modal-close" onclick="closeLogin()">×</button>
-    <h3>تسجيل الدخول</h3>
-    <p>أدخل بريدك الإلكتروني للمتابعة</p>
+    <h3 style="margin-bottom:1rem">تسجيل الدخول</h3>
     <input type="email" id="loginEmail" placeholder="البريد الإلكتروني">
     <input type="password" id="loginPass" placeholder="كلمة المرور">
-    <div class="modal-error" id="loginError">البيانات غير صحيحة</div>
     <button class="btn btn-primary" style="width:100%" onclick="doLogin()">دخول</button>
   </div>
 </div>
 
-<!-- ADMIN PANEL -->
 <div class="admin-panel" id="adminPanel">
   <div class="admin-box">
-    <button class="admin-close" onclick="closeAdmin()">×</button>
-    <h2>لوحة الإدارة</h2>
-    <p>مرحباً بك يا سيد حسين. تحكم في محتوى موقعك من هنا.</p>
-    <div class="admin-game-list" id="adminGameList"></div>
-    <button class="btn-admin btn-add" onclick="addGame()">+ إضافة لعبة جديدة</button>
-    <div class="admin-btn-row">
-      <button class="btn-admin btn-save" onclick="saveGames()">حفظ التغييرات</button>
-      <div id="saveMsg" class="save-msg">✅ تم الحفظ بنجاح!</div>
+    <button class="modal-close" onclick="closeAdmin()">×</button>
+    <h2 style="margin-bottom:2rem">لوحة التحكم الشاملة</h2>
+    
+    <div class="admin-section">
+      <h3>📱 الروابط الاجتماعية</h3>
+      <div class="admin-game-fields">
+        <div>
+          <label>رقم الواتساب (بدون +)</label>
+          <input id="setWA" placeholder="97333274727" />
+        </div>
+        <div>
+          <label>رابط الإنستقرام</label>
+          <input id="setIG" placeholder="https://instagram.com/..." />
+        </div>
+      </div>
     </div>
+
+    <div class="admin-section">
+      <h3>🎮 إدارة الألعاب</h3>
+      <div id="adminGameList"></div>
+      <button class="btn btn-secondary" onclick="addGame()">+ إضافة لعبة</button>
+    </div>
+
+    <button class="btn-admin btn-save" onclick="saveAll()">حفظ كل التغييرات</button>
+    <div id="saveMsg" class="save-msg">✅ تم تحديث الموقع بنجاح!</div>
   </div>
 </div>
 
 <script>
-  // ===== DATA =====
   const ADMIN_EMAIL = 'sayedhusain133@gmail.com';
-  const ADMIN_PASS = 'admin2026';
+  const ADMIN_PASS = 'Hh33274727';
 
-  const defaultGames = [
-    {
-      id: 1,
-      name: 'حروف — Huroof',
-      emoji: '🔤',
-      tags: ['ألغاز', 'كلمات'],
-      desc: 'لعبة ألغاز وكلمات ممتعة تتحدى ذكاءك اللغوي. اكتشف الكلمات المخفية، وسّع مفرداتك، واستمتع بتجربة لعب فريدة.',
-      features: ['تحديات يومية', 'مجانية بالكامل', 'بدون إعلانات'],
-      url: 'https://1da8de91-55d5-4d39-ab0a-e4250ab35ba8-00-1ktv31il5kg3a.pike.replit.dev/',
-      status: 'featured',
-      plays: 0
-    }
-  ];
+  let siteData = JSON.parse(localStorage.getItem('shgames_master_data')) || {
+    wa: '97333274727',
+    ig: 'https://instagram.com/sh_games',
+    games: [
+      {
+        id: 1, name: 'حروف — Huroof', logo: 'https://i.ibb.co/Lz0D6PZ/huroof-logo.png', bg: 'https://i.ibb.co/Vv3M3P0/huroof-bg.jpg', icon: '',
+        tags: ['ألغاز'], desc: 'تحدى ذكاءك اللغوي.', features: ['مجانية'], url: '#', status: 'featured', updateStatus: 'continuous', hasPurchase: true
+      }
+    ]
+  };
 
-  let games = JSON.parse(localStorage.getItem('shgames_data') || 'null') || defaultGames;
-  let isLoggedIn = false;
+  function renderSite() {
+    // Socials
+    const socials = document.getElementById('navSocials');
+    socials.innerHTML = `
+      <a href="https://wa.me/${siteData.wa}" class="wa-link" target="_blank">
+        <svg class="social-icon" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      </a>
+      <a href="${siteData.ig}" class="ig-link" target="_blank">
+        <svg class="social-icon" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.332 3.608 1.308.975.975 1.245 2.242 1.308 3.608.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.332 2.633-1.308 3.608-.975.975-2.242 1.245-3.608 1.308-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.332-3.608-1.308-.975-.975-1.245-2.242-1.308-3.608-.058-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.85c.062-1.366.332-2.633 1.308-3.608.975-.975 2.242-1.245 3.608-1.308 1.266-.058 1.646-.07 4.85-.07M12 0C8.741 0 8.333.014 7.053.072 2.695.272.272 2.69.072 7.053.014 8.333 0 8.741 0 12s.014 3.667.072 4.947c.2 4.353 2.615 6.768 6.963 6.963 1.28.058 1.688.072 4.947.072s3.667-.014 4.947-.072c4.351-.195 6.765-2.61 6.963-6.963.058-1.28.072-1.688.072-4.947s-.014-3.667-.072-4.947c-.2-4.353-2.615-6.768-6.963-6.963C15.667.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+      </a>
+    `;
 
-  // ===== RENDER GAMES =====
-  function renderGames() {
+    // Games
     const grid = document.getElementById('gamesGrid');
     grid.innerHTML = '';
-    const released = games.filter(g => g.status !== 'incomplete');
-    const incomplete = games.filter(g => g.status === 'incomplete');
-
-    released.forEach(g => grid.appendChild(makeCard(g)));
-    incomplete.forEach(g => grid.appendChild(makeCard(g)));
-
-    if (incomplete.length === 0) {
-      const div = document.createElement('div');
-      div.className = 'coming-card';
-      div.innerHTML = '<div class="icon">🎮</div><p>ألعاب جديدة قادمة قريباً...</p>';
-      grid.appendChild(div);
-    }
-
-    const count = released.length;
-    document.getElementById('statCount').textContent = '+' + count;
-    document.getElementById('statCount2').textContent = '+' + count;
+    siteData.games.forEach(g => {
+      const card = document.createElement('div');
+      card.className = 'game-card';
+      const updateMap = { continuous: 'إضافات مستمرة', fixed: 'إضافات ثابتة', experimental: 'نسخة تجريبية' };
+      card.innerHTML = `
+        <div class="game-thumb">
+          <img src="${g.bg}" class="game-bg-img">
+          <img src="${g.logo}" class="game-logo-img">
+          ${g.status==='featured'?'<span class="badge-featured">مميزة</span>':''}
+          ${g.hasPurchase?'<span class="badge-purchase">🛒 شراء داخل اللعبة</span>':''}
+        </div>
+        <div class="game-body">
+          <h3><span class="update-tag ${g.updateStatus}">${updateMap[g.updateStatus]}</span> ${g.name}</h3>
+          <p>${g.desc}</p>
+          <a href="${g.url}" class="btn btn-primary" style="width:100%; text-align:center">العب الآن</a>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+    document.getElementById('statCount').innerText = '+' + siteData.games.length;
+    document.getElementById('statCount2').innerText = '+' + siteData.games.length;
   }
 
-  function makeCard(g) {
-    const card = document.createElement('div');
-    card.className = 'game-card' + (g.status === 'incomplete' ? ' incomplete' : '');
-    const badgeMap = { featured: '<span class="badge-featured">مميزة</span>', popular: '<span class="badge-popular">🔥 الأكثر لعباً</span>', incomplete: '<span class="badge-incomplete">قريباً</span>', normal: '' };
-    const featuresHtml = (g.features || []).map(f => `<li>${f}</li>`).join('');
-    const tagsHtml = (g.tags || []).map(t => `<span class="game-tag">${t}</span>`).join('');
-    const btnHtml = g.status !== 'incomplete' && g.url
-      ? `<a href="${g.url}" target="_blank" class="btn btn-primary" style="width:100%;text-align:center;">العب الآن</a>`
-      : `<span style="color:var(--muted);font-size:0.9rem;">قريباً...</span>`;
-    card.innerHTML = `
-      <div class="game-thumb">${g.emoji || '🎮'}${badgeMap[g.status] || ''}</div>
-      <div class="game-body">
-        <div class="game-tags">${tagsHtml}</div>
-        <h3>${g.name}</h3>
-        <p>${g.desc}</p>
-        <ul class="game-features">${featuresHtml}</ul>
-        ${btnHtml}
-      </div>`;
-    return card;
-  }
-
-  // ===== LOGIN =====
   function openLogin() { document.getElementById('loginModal').classList.add('open'); }
-  function closeLogin() { document.getElementById('loginModal').classList.remove('open'); document.getElementById('loginError').style.display = 'none'; }
+  function closeLogin() { document.getElementById('loginModal').classList.remove('open'); }
   function doLogin() {
-    const email = document.getElementById('loginEmail').value.trim();
-    const pass = document.getElementById('loginPass').value.trim();
-    if (email === ADMIN_EMAIL && pass === ADMIN_PASS) {
-      isLoggedIn = true;
-      closeLogin();
+    if(document.getElementById('loginEmail').value===ADMIN_EMAIL && document.getElementById('loginPass').value===ADMIN_PASS) {
       document.getElementById('adminBtn').style.display = 'block';
       document.getElementById('loginBtn').style.display = 'none';
-    } else {
-      document.getElementById('loginError').style.display = 'block';
+      closeLogin();
     }
   }
 
-  document.addEventListener('keydown', e => { if (e.key === 'Enter' && document.getElementById('loginModal').classList.contains('open')) doLogin(); });
-
-  // ===== ADMIN =====
   function openAdmin() {
+    document.getElementById('setWA').value = siteData.wa;
+    document.getElementById('setIG').value = siteData.ig;
     renderAdminList();
     document.getElementById('adminPanel').classList.add('open');
   }
@@ -380,67 +338,47 @@
   function renderAdminList() {
     const list = document.getElementById('adminGameList');
     list.innerHTML = '';
-    games.forEach((g, i) => {
+    siteData.games.forEach((g, i) => {
       const div = document.createElement('div');
       div.className = 'admin-game-item';
       div.innerHTML = `
-        <div class="admin-game-header">
-          <span>${g.emoji || '🎮'} ${g.name}</span>
-          <button class="btn-delete" onclick="deleteGame(${i})">🗑 حذف</button>
-        </div>
         <div class="admin-game-fields">
-          <div>
-            <label>اسم اللعبة</label>
-            <input value="${g.name}" onchange="games[${i}].name=this.value" />
-          </div>
-          <div>
-            <label>إيموجي</label>
-            <input value="${g.emoji || '🎮'}" onchange="games[${i}].emoji=this.value" />
-          </div>
-          <div>
-            <label>الحالة</label>
-            <select onchange="games[${i}].status=this.value">
-              <option value="featured" ${g.status==='featured'?'selected':''}>⭐ مميزة</option>
-              <option value="popular" ${g.status==='popular'?'selected':''}>🔥 الأكثر لعباً</option>
-              <option value="normal" ${g.status==='normal'?'selected':''}>عادية</option>
-              <option value="incomplete" ${g.status==='incomplete'?'selected':''}>🔒 غير مكتملة</option>
-            </select>
-          </div>
-          <div>
-            <label>رابط اللعبة</label>
-            <input value="${g.url || ''}" placeholder="https://..." onchange="games[${i}].url=this.value" />
-          </div>
-          <div class="full">
-            <label>الوصف</label>
-            <textarea onchange="games[${i}].desc=this.value">${g.desc}</textarea>
-          </div>
-        </div>`;
+          <input value="${g.name}" onchange="siteData.games[${i}].name=this.value" placeholder="اسم اللعبة">
+          <select onchange="siteData.games[${i}].updateStatus=this.value">
+            <option value="continuous" ${g.updateStatus==='continuous'?'selected':''}>مستمرة</option>
+            <option value="fixed" ${g.updateStatus==='fixed'?'selected':''}>ثابتة</option>
+            <option value="experimental" ${g.updateStatus==='experimental'?'selected':''}>تجريبية</option>
+          </select>
+          <input value="${g.logo}" onchange="siteData.games[${i}].logo=this.value" placeholder="رابط الشعار PNG">
+          <input value="${g.bg}" onchange="siteData.games[${i}].bg=this.value" placeholder="رابط الخلفية">
+          <select onchange="siteData.games[${i}].hasPurchase=(this.value==='true')">
+            <option value="true" ${g.hasPurchase?'selected':''}>🛒 تفعيل الشراء</option>
+            <option value="false" ${!g.hasPurchase?'selected':''}>❌ تعطيل الشراء</option>
+          </select>
+          <input value="${g.url}" onchange="siteData.games[${i}].url=this.value" placeholder="رابط اللعبة">
+          <textarea class="full" onchange="siteData.games[${i}].desc=this.value">${g.desc}</textarea>
+        </div>
+        <button class="btn-delete" style="margin-top:1rem" onclick="siteData.games.splice(${i},1);renderAdminList()">حذف</button>
+      `;
       list.appendChild(div);
     });
   }
 
   function addGame() {
-    games.push({ id: Date.now(), name: 'لعبة جديدة', emoji: '🎮', tags: [], desc: 'وصف اللعبة', features: [], url: '', status: 'incomplete' });
+    siteData.games.push({id:Date.now(), name:'لعبة جديدة', logo:'', bg:'', desc:'', url:'#', status:'normal', updateStatus:'fixed', hasPurchase:false});
     renderAdminList();
   }
 
-  function deleteGame(i) {
-    if (confirm('هل أنت متأكد من حذف هذه اللعبة؟')) {
-      games.splice(i, 1);
-      renderAdminList();
-    }
+  function saveAll() {
+    siteData.wa = document.getElementById('setWA').value;
+    siteData.ig = document.getElementById('setIG').value;
+    localStorage.setItem('shgames_master_data', JSON.stringify(siteData));
+    renderSite();
+    document.getElementById('saveMsg').style.display = 'block';
+    setTimeout(()=>document.getElementById('saveMsg').style.display='none', 2000);
   }
 
-  function saveGames() {
-    localStorage.setItem('shgames_data', JSON.stringify(games));
-    renderGames();
-    const msg = document.getElementById('saveMsg');
-    msg.style.display = 'block';
-    setTimeout(() => msg.style.display = 'none', 3000);
-  }
-
-  // ===== INIT =====
-  renderGames();
+  renderSite();
 </script>
 </body>
 </html>
