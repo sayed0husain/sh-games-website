@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SH Games</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .header {
+            background-color: #222;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .header-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.5);
+            z-index: 1;
+        }
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+        .logo {
+            max-width: 150px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+        h1 {
+            margin: 0;
+            font-size: 3em;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        .game-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+        .game-card:hover {
+            transform: translateY(-5px);
+        }
+        .game-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        .game-card-content {
+            padding: 15px;
+        }
+        .game-card-content h3 {
+            margin-top: 0;
+            font-size: 1.5em;
+        }
+        .game-card-content p {
+            font-size: 0.9em;
+            color: #666;
+        }
+        .game-card-content a {
+            display: inline-block;
+            background-color: #007bff;
+            color: #fff;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #222;
+            color: #fff;
+            margin-top: 30px;
+        }
+        .admin-panel {
+            display: none;
+            margin-top: 20px;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+        .admin-panel label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .admin-panel input[type="text"],
+        .admin-panel textarea,
+        .admin-panel select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        .admin-panel button {
+            background-color: #28a745;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .login-section {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .login-section input[type="email"] {
+            width: calc(100% - 22px);
+            max-width: 300px;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        .login-section button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        .welcome-message {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        .admin-button {
+            background-color: #6c757d;
+            color: #fff;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-background" id="headerBackground" style="background-image: url(\'placeholder_background.jpg\');"></div>
+        <div class="header-content">
+            <img src="placeholder_logo.png" alt="SH Games Logo" class="logo" id="siteLogo">
+            <h1>SH Games</h1>
+            <p>تأسست عام 2025، أطلقت عام 2026</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>أحدث الألعاب</h2>
+        <div class="game-grid" id="gameGrid">
+            <!-- Game cards will be loaded here by JavaScript -->
+        </div>
+
+        <div class="login-section" id="authSection">
+            <div id="loginForm">
+                <h3>تسجيل الدخول</h3>
+                <input type="email" id="userEmail" placeholder="أدخل بريدك الإلكتروني">
+                <button onclick="handleLogin()">تسجيل الدخول</button>
+            </div>
+            <div id="welcomeMessage" style="display:none;">
+                <p class="welcome-message">مرحباً بك، <span id="loggedInUserEmail"></span>!</p>
+                <button onclick="logout()">تسجيل الخروج</button>
+                <button id="adminPanelButton" class="admin-button" style="display:none;" onclick="toggleAdminPanel()">لوحة الإدارة</button>
+            </div>
+        </div>
+
+        <div class="admin-panel" id="adminPanel">
+            <h3>إدارة الألعاب</h3>
+            <form id="gameForm">
+                <input type="hidden" id="gameId">
+                <label for="gameName">اسم اللعبة:</label>
+                <input type="text" id="gameName" required>
+
+                <label for="gameDescription">الوصف:</label>
+                <textarea id="gameDescription" rows="4" required></textarea>
+
+                <label for="gameImage">رابط صورة اللعبة:</label>
+                <input type="text" id="gameImage" required>
+
+                <label for="gameLink">رابط اللعبة:</label>
+                <input type="text" id="gameLink" required>
+
+                <label for="gameStatus">الحالة:</label>
+                <select id="gameStatus">
+                    <option value="normal">عادية</option>
+                    <option value="featured">مميزة</option>
+                    <option value="most_played">الأكثر لعباً</option>
+                    <option value="incomplete">غير مكتملة</option>
+                </select>
+
+                <button type="submit">حفظ اللعبة</button>
+                <button type="button" onclick="clearForm()">إلغاء</button>
+            </form>
+            <hr>
+            <h4>الألعاب الحالية</h4>
+            <div id="currentGames"></div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2026 SH Games. جميع الحقوق محفوظة.</p>
+        <p>للتواصل: واتساب البحرين <a href="https://wa.me/97333274727" target="_blank">+973 3327 4727</a></p>
+    </div>
+
+    <script>
+        const ADMIN_EMAIL = \'sayedhusain133@gmail.com\'; // Replace with the actual admin email
+        let games = JSON.parse(localStorage.getItem(\'sh_games\')) || [];
+
+        function renderGames() {
+            const gameGrid = document.getElementById(\'gameGrid\');
+            gameGrid.innerHTML = \'\';
+            games.forEach(game => {
+                let statusIcon = \'\';
+                if (game.status === \'featured\') statusIcon = \'⭐\';
+                else if (game.status === \'most_played\') statusIcon = \'🔥\';
+                else if (game.status === \'incomplete\') statusIcon = \'🔒\';
+
+                const gameCard = `
+                    <div class="game-card">
+                        <img src="${game.image}" alt="${game.name}">
+                        <div class="game-card-content">
+                            <h3>${game.name} ${statusIcon}</h3>
+                            <p>${game.description}</p>
+                            <a href="${game.link}" target="_blank">العب الآن</a>
+                        </div>
+                    </div>
+                `;
+                gameGrid.innerHTML += gameCard;
+            });
+            renderAdminGames();
+        }
+
+        function renderAdminGames() {
+            const currentGamesDiv = document.getElementById(\'currentGames\');
+            currentGamesDiv.innerHTML = \'\';
+            games.forEach( (game, index) => {
+                const gameItem = `
+                    <div>
+                        <span>${game.name} (${game.status})</span>
+                        <button class="admin-button" onclick="editGame(${index})">تعديل</button>
+                        <button class="admin-button" onclick="deleteGame(${index})">حذف</button>
+                    </div>
+                `;
+                currentGamesDiv.innerHTML += gameItem;
+            });
+        }
+
+        function handleLogin() {
+            const userEmailInput = document.getElementById(\'userEmail\');
+            const email = userEmailInput.value.trim();
+
+            if (email) {
+                localStorage.setItem(\'loggedInUser\', email);
+                updateAuthSection();
+            } else {
+                alert(\'الرجاء إدخال بريد إلكتروني صحيح.\');
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem(\'loggedInUser\');
+            localStorage.removeItem(\'isAdminPanelOpen\'); // Close admin panel on logout
+            updateAuthSection();
+            document.getElementById(\'adminPanel\').style.display = \'none\';
+        }
+
+        function updateAuthSection() {
+            const loggedInUser = localStorage.getItem(\'loggedInUser\');
+            const loginForm = document.getElementById(\'loginForm\');
+            const welcomeMessageDiv = document.getElementById(\'welcomeMessage\');
+            const loggedInUserEmailSpan = document.getElementById(\'loggedInUserEmail\');
+            const adminPanelButton = document.getElementById(\'adminPanelButton\');
+            const adminPanel = document.getElementById(\'adminPanel\');
+
+            if (loggedInUser) {
+                loginForm.style.display = \'none\';
+                welcomeMessageDiv.style.display = \'block\';
+                loggedInUserEmailSpan.textContent = loggedInUser;
+
+                if (loggedInUser === ADMIN_EMAIL) {
+                    adminPanelButton.style.display = \'inline-block\';
+                    if (localStorage.getItem(\'isAdminPanelOpen\') === \'true\') {
+                        adminPanel.style.display = \'block\';
+                    }
+                } else {
+                    adminPanelButton.style.display = \'none\';
+                    adminPanel.style.display = \'none\';
+                }
+            } else {
+                loginForm.style.display = \'block\';
+                welcomeMessageDiv.style.display = \'none\';
+                adminPanelButton.style.display = \'none\';
+                adminPanel.style.display = \'none\';
+            }
+        }
+
+        function toggleAdminPanel() {
+            const adminPanel = document.getElementById(\'adminPanel\');
+            if (adminPanel.style.display === \'none\' || adminPanel.style.display === \'\') {
+                adminPanel.style.display = \'block\';
+                localStorage.setItem(\'isAdminPanelOpen\', \'true\');
+            } else {
+                adminPanel.style.display = \'none\';
+                localStorage.setItem(\'isAdminPanelOpen\', \'false\');
+            }
+        }
+
+        document.getElementById(\'gameForm\').addEventListener(\'submit\', function(event) {
+            event.preventDefault();
+            const gameId = document.getElementById(\'gameId\').value;
+            const gameName = document.getElementById(\'gameName\').value;
+            const gameDescription = document.getElementById(\'gameDescription\').value;
+            const gameImage = document.getElementById(\'gameImage\').value;
+            const gameLink = document.getElementById(\'gameLink\').value;
+            const gameStatus = document.getElementById(\'gameStatus\').value;
+
+            const newGame = { name: gameName, description: gameDescription, image: gameImage, link: gameLink, status: gameStatus };
+
+            if (gameId === \'\') {
+                games.push(newGame);
+            } else {
+                games[parseInt(gameId)] = newGame;
+            }
+            localStorage.setItem(\'sh_games\', JSON.stringify(games));
+            clearForm();
+            renderGames();
+        });
+
+        function editGame(index) {
+            const game = games[index];
+            document.getElementById(\'gameId\').value = index;
+            document.getElementById(\'gameName\').value = game.name;
+            document.getElementById(\'gameDescription\').value = game.description;
+            document.getElementById(\'gameImage\').value = game.image;
+            document.getElementById(\'gameLink\').value = game.link;
+            document.getElementById(\'gameStatus\').value = game.status;
+        }
+
+        function deleteGame(index) {
+            if (confirm(\'هل أنت متأكد أنك تريد حذف هذه اللعبة؟\')) {
+                games.splice(index, 1);
+                localStorage.setItem(\'sh_games\', JSON.stringify(games));
+                renderGames();
+            }
+        }
+
+        function clearForm() {
+            document.getElementById(\'gameForm\').reset();
+            document.getElementById(\'gameId\').value = \'\';
+        }
+
+        // Initial render and auth state update
+        renderGames();
+        updateAuthSection();
+
+        // Placeholder for logo and background image upload (client-side simulation)
+        // In a real scenario, these would be handled by a backend service.
+        // For now, the user can manually replace \'placeholder_logo.png\' and \'placeholder_background.jpg\'
+        // in the HTML file or via an admin interface if a backend is implemented.
+    </script>
+</body>
+</html>
